@@ -6,6 +6,8 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - un proyecto Rust listo para ejecutar
 - un ejemplo ejecutable por cada dia en `src/bin/`
 - archivos de apoyo en `data/`
+- documentacion complementaria en [docs/README.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/README.md)
+- un proyecto bonus mas completo en `bonus_gestor_tareas_std`
 
 ## Como usar el curso
 
@@ -38,6 +40,13 @@ Para correr los tests del dia 23:
 cargo test --bin dia_23_tests
 ```
 
+Para ejecutar el proyecto bonus:
+
+```bash
+cargo run --bin bonus_gestor_tareas_std -- list
+cargo run --bin bonus_gestor_tareas_std -- add Practicar ownership
+```
+
 ## Estructura
 
 ```text
@@ -56,8 +65,10 @@ cargo test --bin dia_23_tests
 1. Lee el dia correspondiente en [manual_rust_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/manual_rust_30_dias.md).
 2. Ejecuta el binario de ese dia.
 3. Reescribe el ejemplo sin mirar.
-4. Modificalo para obligarte a entenderlo.
-5. Corre `cargo fmt`, `cargo clippy` y `cargo test` cuando aplique.
+4. Consulta la documentacion complementaria cuando necesites mas contexto.
+5. Resuelve el reto extra correspondiente en `docs/05_retos_extra_30_dias.md`.
+6. Modificalo para obligarte a entenderlo.
+7. Corre `cargo fmt`, `cargo clippy` y `cargo test` cuando aplique.
 
 ## Mapa de binarios
 
@@ -66,6 +77,16 @@ cargo test --bin dia_23_tests
 - Semana 3: `dia_15_enums` a `dia_21_analizador_texto`
 - Semana 4: `dia_22_modulos` a `dia_28_libreria_reutilizable`
 - Semana 5: `dia_29_concurrencia` y `dia_30_proyecto_final`
+- Bonus: `bonus_gestor_tareas_std`
+
+## Material ampliado
+
+- Guia de estudio: [docs/01_guia_de_estudio_y_habitos.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/01_guia_de_estudio_y_habitos.md)
+- Modelo mental: [docs/02_modelo_mental_de_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/02_modelo_mental_de_rust.md)
+- Chuleta: [docs/03_chuleta_rust_y_cargo.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/03_chuleta_rust_y_cargo.md)
+- Diagnostico de errores: [docs/04_diagnostico_de_errores_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/04_diagnostico_de_errores_rust.md)
+- Retos extra: [docs/05_retos_extra_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/05_retos_extra_30_dias.md)
+- Proyectos y siguiente nivel: [docs/06_proyectos_finales_y_siguiente_nivel.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/06_proyectos_finales_y_siguiente_nivel.md)
 
 ## Objetivo del repositorio
 

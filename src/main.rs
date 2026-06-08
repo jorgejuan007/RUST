@@ -35,12 +35,17 @@ fn main() {
     println!("Curso de Rust en 30 dias");
     println!();
     println!("Manual: manual_rust_30_dias.md");
+    println!("Documentacion ampliada: docs/README.md");
     println!("Ejecuta un dia concreto con:");
     println!("cargo run --bin <nombre_del_binario>");
+    println!("Proyecto bonus:");
+    println!("cargo run --bin bonus_gestor_tareas_std -- list");
     println!();
     println!("Binarios disponibles:");
 
     for dia in dias {
         println!("- {dia}");
     }
+
+    println!("- bonus_gestor_tareas_std");
 }

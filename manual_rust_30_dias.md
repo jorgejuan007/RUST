@@ -13,6 +13,15 @@ Regla de estudio recomendada:
 3. Reescribe la solucion con tus propias palabras.
 4. Ejecuta `cargo fmt`, `cargo clippy` y, cuando aplique, `cargo test`.
 
+Documentacion complementaria recomendada:
+
+- `docs/01_guia_de_estudio_y_habitos.md`
+- `docs/02_modelo_mental_de_rust.md`
+- `docs/03_chuleta_rust_y_cargo.md`
+- `docs/04_diagnostico_de_errores_rust.md`
+- `docs/05_retos_extra_30_dias.md`
+- `docs/06_proyectos_finales_y_siguiente_nivel.md`
+
 ## Dia 1. Hola Rust y Cargo
 
 **Enunciado**

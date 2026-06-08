@@ -1,0 +1,3 @@
+Rust es seguro.
+Rust es rapido.
+Rust es expresivo.

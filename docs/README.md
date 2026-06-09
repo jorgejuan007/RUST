@@ -10,6 +10,15 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 - [04_diagnostico_de_errores_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/04_diagnostico_de_errores_rust.md)
 - [05_retos_extra_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/05_retos_extra_30_dias.md)
 - [06_proyectos_finales_y_siguiente_nivel.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/06_proyectos_finales_y_siguiente_nivel.md)
+- [07_glosario_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/07_glosario_rust.md)
+- [08_preguntas_de_repaso_y_respuestas.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/08_preguntas_de_repaso_y_respuestas.md)
+- [09_antipatrones_y_buenas_practicas.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/09_antipatrones_y_buenas_practicas.md)
+- [10_soluciones_a_retos_extra.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/10_soluciones_a_retos_extra.md)
+- [11_evaluacion_final_y_rubrica.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/11_evaluacion_final_y_rubrica.md)
+- [12_serde_clap_thiserror.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/12_serde_clap_thiserror.md)
+- [13_async_y_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/13_async_y_tokio.md)
+- [14_arquitectura_y_refactor_en_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/14_arquitectura_y_refactor_en_rust.md)
+- [15_ruta_postcurso.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/15_ruta_postcurso.md)
 
 ## Orden recomendado
 
@@ -17,4 +26,6 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 2. Usa la guia de estudio para organizar tu rutina.
 3. Consulta la chuleta y el diagnostico cuando te atasques.
 4. Resuelve los retos extra al cerrar cada dia.
-5. Usa la guia de proyectos para construir algo propio al terminar el curso.
+5. Compara con las soluciones de retos solo despues de intentarlo.
+6. Usa el glosario y las preguntas de repaso para fijar conceptos.
+7. Cierra con la evaluacion final y la guia de proyectos para construir algo propio.

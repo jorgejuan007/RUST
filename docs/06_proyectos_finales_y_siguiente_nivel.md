@@ -85,12 +85,12 @@ Para proyectos medianos, una buena base suele ser:
 
 ```text
 src/
-├── main.rs
-├── lib.rs
-├── models.rs
-├── storage.rs
-├── commands.rs
-└── errors.rs
+|-- main.rs
+|-- lib.rs
+|-- models.rs
+|-- storage.rs
+|-- commands.rs
+`-- errors.rs
 ```
 
 ## Crates que deberias aprender despues

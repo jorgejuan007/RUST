@@ -21,6 +21,15 @@ Documentacion complementaria recomendada:
 - `docs/04_diagnostico_de_errores_rust.md`
 - `docs/05_retos_extra_30_dias.md`
 - `docs/06_proyectos_finales_y_siguiente_nivel.md`
+- `docs/07_glosario_rust.md`
+- `docs/08_preguntas_de_repaso_y_respuestas.md`
+- `docs/09_antipatrones_y_buenas_practicas.md`
+- `docs/10_soluciones_a_retos_extra.md`
+- `docs/11_evaluacion_final_y_rubrica.md`
+- `docs/12_serde_clap_thiserror.md`
+- `docs/13_async_y_tokio.md`
+- `docs/14_arquitectura_y_refactor_en_rust.md`
+- `docs/15_ruta_postcurso.md`
 
 ## Dia 1. Hola Rust y Cargo
 

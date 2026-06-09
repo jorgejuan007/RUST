@@ -31,6 +31,13 @@ fn main() {
         "dia_29_concurrencia",
         "dia_30_proyecto_final",
     ];
+    let bonus = [
+        "bonus_gestor_tareas_std",
+        "bonus_gestor_tareas_json",
+        "bonus_uso_libreria",
+        "bonus_option_result_combinadores",
+        "bonus_canales_mutex",
+    ];
 
     println!("Curso de Rust en 30 dias");
     println!();
@@ -40,6 +47,7 @@ fn main() {
     println!("cargo run --bin <nombre_del_binario>");
     println!("Proyecto bonus:");
     println!("cargo run --bin bonus_gestor_tareas_std -- list");
+    println!("cargo run --bin bonus_gestor_tareas_json -- list");
     println!();
     println!("Binarios disponibles:");
 
@@ -47,5 +55,7 @@ fn main() {
         println!("- {dia}");
     }
 
-    println!("- bonus_gestor_tareas_std");
+    for extra in bonus {
+        println!("- {extra}");
+    }
 }

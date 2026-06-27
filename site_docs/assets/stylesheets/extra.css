@@ -1,0 +1,32 @@
+:root {
+  --accent: #a03c2f;
+  --ink: #1f2a34;
+  --paper: #fbf8f1;
+}
+
+body {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.wy-side-nav-search,
+.wy-nav-top {
+  background: linear-gradient(135deg, #a03c2f, #d78432);
+}
+
+.wy-menu-vertical header,
+.wy-menu-vertical p.caption {
+  color: #7a2d24;
+}
+
+a {
+  color: #8c3429;
+}
+
+a:hover {
+  color: #c5661f;
+}
+
+code {
+  color: #8c3429;
+}

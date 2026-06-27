@@ -10,6 +10,8 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - un proyecto bonus mas completo en `bonus_gestor_tareas_std`
 - una libreria reutilizable con modulos y tests en [src/lib.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/lib.rs)
 - una capa avanzada con `clap`, `serde`, `serde_json` y `thiserror`
+- soluciones completas ejecutables para los 30 retos extra
+- automatizacion local con `Makefile` y CI/Pages con GitHub Actions
 
 ## Como usar el curso
 
@@ -36,13 +38,60 @@ Para comprobar que todo compila:
 cargo check --bins
 ```
 
+## Sitio MkDocs
+
+Para regenerar el contenido web a partir del material del repositorio:
+
+```bash
+python3 scripts/sync_mkdocs.py
+```
+
+Tambien puedes usar:
+
+```bash
+make sync-docs
+```
+
+Para levantar el sitio en local:
+
+```bash
+mkdocs serve
+```
+
+Para construirlo y validar enlaces:
+
+```bash
+mkdocs build --strict
+```
+
+O bien:
+
+```bash
+make docs-build
+```
+
+## Automatizacion local
+
+Objetivos disponibles:
+
+```bash
+make help
+make check
+make test
+make test-doc
+make doc-api
+make ci
+```
+
+`make ci` regenera `site_docs`, ejecuta `cargo check --bins`, `cargo test` y `mkdocs build --strict`.
+
 Para correr los tests del dia 23:
 
 ```bash
 cargo test --bin dia_23_tests
 ```
 
-Para ejecutar el proyecto bonus:
+Para ejecutar bonus:
 
 ```bash
 cargo run --bin bonus_gestor_tareas_std -- list
@@ -52,6 +101,18 @@ cargo run --bin bonus_gestor_tareas_json -- add Aprender serde
 cargo run --bin bonus_uso_libreria
 cargo run --bin bonus_option_result_combinadores
 cargo run --bin bonus_canales_mutex
+cargo run --bin bonus_async_tokio
+cargo run --bin bonus_errores_io_anyhow
+cargo run --bin bonus_smart_pointers
+cargo run --bin bonus_async_tokio_avanzado
+```
+
+Para ejecutar retos completos:
+
+```bash
+cargo run --bin reto_01_operaciones_extra
+cargo run --bin reto_22_modularizado
+cargo run --bin reto_30_cli_tareas -- list
 ```
 
 ## Estructura
@@ -87,7 +148,8 @@ cargo run --bin bonus_canales_mutex
 - Semana 4: `dia_22_modulos` a `dia_28_libreria_reutilizable`
 - Semana 5: `dia_29_concurrencia` y `dia_30_proyecto_final`
 - Bonus: `bonus_gestor_tareas_std`, `bonus_gestor_tareas_json`
-- Bonus adicionales: `bonus_uso_libreria`, `bonus_option_result_combinadores`, `bonus_canales_mutex`
+- Bonus adicionales: `bonus_uso_libreria`, `bonus_option_result_combinadores`, `bonus_canales_mutex`, `bonus_async_tokio`, `bonus_errores_io_anyhow`, `bonus_smart_pointers`, `bonus_async_tokio_avanzado`
+- Retos completos: `reto_01_operaciones_extra` a `reto_30_cli_tareas`
 
 ## Material ampliado
 
@@ -106,6 +168,21 @@ cargo run --bin bonus_canales_mutex
 - Async y Tokio: [docs/13_async_y_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/13_async_y_tokio.md)
 - Arquitectura y refactor: [docs/14_arquitectura_y_refactor_en_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/14_arquitectura_y_refactor_en_rust.md)
 - Ruta postcurso: [docs/15_ruta_postcurso.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/15_ruta_postcurso.md)
+- Soluciones completas ejecutables: [docs/16_soluciones_completas_ejecutables.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/16_soluciones_completas_ejecutables.md)
+- Automatizacion y publicacion: [docs/17_automatizacion_y_publicacion.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/17_automatizacion_y_publicacion.md)
+- Errores, I O y anyhow: [docs/18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
+- Smart pointers y mutabilidad interior: [docs/19_smart_pointers_y_mutabilidad_interior.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/19_smart_pointers_y_mutabilidad_interior.md)
+- Async practico con Tokio: [docs/20_async_practico_con_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/20_async_practico_con_tokio.md)
+- Tests de integracion y doctests: [docs/21_tests_de_integracion_y_doctests.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/21_tests_de_integracion_y_doctests.md)
+- Cargo profesional y workspaces: [docs/22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)
+
+## Automatizacion y despliegue
+
+- Makefile local: [Makefile](/Users/legalintermedia/Documents/GitHub/RUST/Makefile)
+- Manifiesto del paquete: [Cargo.toml](/Users/legalintermedia/Documents/GitHub/RUST/Cargo.toml)
+- Dependencias docs: [requirements-docs.txt](/Users/legalintermedia/Documents/GitHub/RUST/requirements-docs.txt)
+- CI: [.github/workflows/ci.yml](/Users/legalintermedia/Documents/GitHub/RUST/.github/workflows/ci.yml)
+- GitHub Pages: [.github/workflows/pages.yml](/Users/legalintermedia/Documents/GitHub/RUST/.github/workflows/pages.yml)
 
 ## Objetivo del repositorio
 

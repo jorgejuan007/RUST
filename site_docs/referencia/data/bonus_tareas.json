@@ -1,0 +1,14 @@
+{
+  "tareas": [
+    {
+      "id": 1,
+      "titulo": "Practicar clap",
+      "estado": "pendiente"
+    },
+    {
+      "id": 2,
+      "titulo": "Persistir datos en JSON",
+      "estado": "hecha"
+    }
+  ]
+}

@@ -74,6 +74,19 @@ async fn saludar() {
 
 Eso no se ejecuta solo. Necesitas un runtime que lo conduzca.
 
+## Ejemplo ejecutable en este repo
+
+Para ver un ejemplo pequeno pero real con `tokio`, ejecuta:
+
+```bash
+cargo run --bin bonus_async_tokio
+```
+
+Archivo relacionado:
+
+- [src/bin/bonus_async_tokio.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_async_tokio.rs)
+- [docs/20_async_practico_con_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/20_async_practico_con_tokio.md)
+
 ## Cuando usar async
 
 Suele tener sentido cuando:

@@ -136,3 +136,10 @@ Una forma sana de organizarlo es:
 - datos: archivos de ejemplo
 
 Eso justamente ya esta representado en este repositorio.
+
+## Para seguir ampliando esta capa
+
+Despues de este documento, enlaza bien con:
+
+- [docs/18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
+- [docs/22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)

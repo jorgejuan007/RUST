@@ -1,0 +1,2 @@
+Rust favorece la seguridad de memoria.
+Tambien ofrece buen rendimiento y herramientas excelentes.

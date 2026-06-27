@@ -19,6 +19,13 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 - [13_async_y_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/13_async_y_tokio.md)
 - [14_arquitectura_y_refactor_en_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/14_arquitectura_y_refactor_en_rust.md)
 - [15_ruta_postcurso.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/15_ruta_postcurso.md)
+- [16_soluciones_completas_ejecutables.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/16_soluciones_completas_ejecutables.md)
+- [17_automatizacion_y_publicacion.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/17_automatizacion_y_publicacion.md)
+- [18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
+- [19_smart_pointers_y_mutabilidad_interior.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/19_smart_pointers_y_mutabilidad_interior.md)
+- [20_async_practico_con_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/20_async_practico_con_tokio.md)
+- [21_tests_de_integracion_y_doctests.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/21_tests_de_integracion_y_doctests.md)
+- [22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)
 
 ## Orden recomendado
 
@@ -28,4 +35,5 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 4. Resuelve los retos extra al cerrar cada dia.
 5. Compara con las soluciones de retos solo despues de intentarlo.
 6. Usa el glosario y las preguntas de repaso para fijar conceptos.
-7. Cierra con la evaluacion final y la guia de proyectos para construir algo propio.
+7. Entra en la capa intermedia con errores/I O, smart pointers, async practico, testing y Cargo.
+8. Cierra con la evaluacion final y la guia de proyectos para construir algo propio.

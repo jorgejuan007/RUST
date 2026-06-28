@@ -124,3 +124,10 @@ make ci
 ## Cierre
 
 Dominar Cargo te ahorra una cantidad enorme de friccion. En proyectos reales, esa soltura cuenta tanto como la sintaxis.
+
+## Cruce recomendado
+
+Esta capa encaja especialmente bien con:
+
+- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
+- [docs/24_persistencia_con_csv_y_toml.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/24_persistencia_con_csv_y_toml.md)

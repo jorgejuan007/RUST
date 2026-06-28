@@ -1,0 +1,5 @@
+id,titulo,estado
+1,Repasar ownership,pendiente
+2,Practicar serde,hecha
+3,Montar una API local,en_progreso
+4,Escribir tests,pendiente

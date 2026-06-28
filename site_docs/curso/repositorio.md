@@ -8,8 +8,11 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - archivos de apoyo en `data/`
 - documentacion complementaria en [docs/README.md](../complementos/index.md)
 - un proyecto bonus mas completo en `bonus_gestor_tareas_std`
-- una libreria reutilizable con modulos y tests en [src/lib.rs](../referencia/codigo/src/lib.rs)
+- una libreria reutilizable con modulos y tests en src/lib.rs (`src/lib.rs`)
 - una capa avanzada con `clap`, `serde`, `serde_json` y `thiserror`
+- ejemplos locales de backend con `axum` y `reqwest`
+- ejemplos de persistencia con `csv` y `toml`
+- una capa siguiente con `rusqlite` y backend modular
 - soluciones completas ejecutables para los 30 retos extra
 - automatizacion local con `Makefile` y CI/Pages con GitHub Actions
 
@@ -105,6 +108,10 @@ cargo run --bin bonus_async_tokio
 cargo run --bin bonus_errores_io_anyhow
 cargo run --bin bonus_smart_pointers
 cargo run --bin bonus_async_tokio_avanzado
+cargo run --bin bonus_backend_axum_reqwest
+cargo run --bin bonus_persistencia_csv_toml
+cargo run --bin bonus_sqlite_rusqlite
+cargo run --bin bonus_backend_axum_modular
 ```
 
 Para ejecutar retos completos:
@@ -148,7 +155,7 @@ cargo run --bin reto_30_cli_tareas -- list
 - Semana 4: `dia_22_modulos` a `dia_28_libreria_reutilizable`
 - Semana 5: `dia_29_concurrencia` y `dia_30_proyecto_final`
 - Bonus: `bonus_gestor_tareas_std`, `bonus_gestor_tareas_json`
-- Bonus adicionales: `bonus_uso_libreria`, `bonus_option_result_combinadores`, `bonus_canales_mutex`, `bonus_async_tokio`, `bonus_errores_io_anyhow`, `bonus_smart_pointers`, `bonus_async_tokio_avanzado`
+- Bonus adicionales: `bonus_uso_libreria`, `bonus_option_result_combinadores`, `bonus_canales_mutex`, `bonus_async_tokio`, `bonus_errores_io_anyhow`, `bonus_smart_pointers`, `bonus_async_tokio_avanzado`, `bonus_backend_axum_reqwest`, `bonus_persistencia_csv_toml`, `bonus_sqlite_rusqlite`, `bonus_backend_axum_modular`
 - Retos completos: `reto_01_operaciones_extra` a `reto_30_cli_tareas`
 
 ## Material ampliado
@@ -175,14 +182,18 @@ cargo run --bin reto_30_cli_tareas -- list
 - Async practico con Tokio: [docs/20_async_practico_con_tokio.md](../complementos/20_async_practico_con_tokio.md)
 - Tests de integracion y doctests: [docs/21_tests_de_integracion_y_doctests.md](../complementos/21_tests_de_integracion_y_doctests.md)
 - Cargo profesional y workspaces: [docs/22_cargo_profesional_y_workspaces.md](../complementos/22_cargo_profesional_y_workspaces.md)
+- Backend local con axum y reqwest: [docs/23_backend_local_con_axum_y_reqwest.md](../complementos/23_backend_local_con_axum_y_reqwest.md)
+- Persistencia con CSV y TOML: [docs/24_persistencia_con_csv_y_toml.md](../complementos/24_persistencia_con_csv_y_toml.md)
+- SQLite con rusqlite: [docs/25_sqlite_con_rusqlite.md](../complementos/25_sqlite_con_rusqlite.md)
+- Backend axum modular y storage: [docs/26_backend_axum_modular_y_storage.md](../complementos/26_backend_axum_modular_y_storage.md)
 
 ## Automatizacion y despliegue
 
-- Makefile local: [Makefile](../referencia/infra/Makefile)
-- Manifiesto del paquete: [Cargo.toml](../referencia/infra/Cargo.toml)
-- Dependencias docs: [requirements-docs.txt](../referencia/infra/requirements-docs.txt)
-- CI: [.github/workflows/ci.yml](../referencia/infra/workflows/ci.yml)
-- GitHub Pages: [.github/workflows/pages.yml](../referencia/infra/workflows/pages.yml)
+- Makefile local: Makefile (`Makefile`)
+- Manifiesto del paquete: Cargo.toml (`Cargo.toml`)
+- Dependencias docs: requirements-docs.txt (`requirements-docs.txt`)
+- CI: .github/workflows/ci.yml (`.github/workflows/ci.yml`)
+- GitHub Pages: .github/workflows/pages.yml (`.github/workflows/pages.yml`)
 
 ## Objetivo del repositorio
 

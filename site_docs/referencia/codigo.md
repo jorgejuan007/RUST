@@ -1,19 +1,23 @@
 # Guia de Codigo Fuente
 
-El sitio copia el codigo del repositorio bajo `referencia/codigo/src/` para que los enlaces desde la documentacion funcionen en web.
+El sitio web no duplica el codigo Rust. En su lugar, resume las rutas mas utiles del repositorio para que puedas localizar rapidamente cada ejemplo.
 
 ## Puntos de entrada utiles
 
-- [src/lib.rs](codigo/src/lib.rs)
-- [src/main.rs](codigo/src/main.rs)
-- [src/bin/bonus_gestor_tareas_json.rs](codigo/src/bin/bonus_gestor_tareas_json.rs)
-- [src/bin/bonus_errores_io_anyhow.rs](codigo/src/bin/bonus_errores_io_anyhow.rs)
-- [src/bin/bonus_smart_pointers.rs](codigo/src/bin/bonus_smart_pointers.rs)
-- [src/bin/bonus_async_tokio_avanzado.rs](codigo/src/bin/bonus_async_tokio_avanzado.rs)
-- [src/bin/reto_22_modularizado/main.rs](codigo/src/bin/reto_22_modularizado/main.rs)
-- [src/bin/reto_30_cli_tareas.rs](codigo/src/bin/reto_30_cli_tareas.rs)
-- [tests/integracion_curso.rs](codigo/tests/integracion_curso.rs)
+- `src/lib.rs`
+- `src/main.rs`
+- `src/bin/bonus_gestor_tareas_json.rs`
+- `src/bin/bonus_errores_io_anyhow.rs`
+- `src/bin/bonus_smart_pointers.rs`
+- `src/bin/bonus_async_tokio_avanzado.rs`
+- `src/bin/bonus_backend_axum_reqwest.rs`
+- `src/bin/bonus_persistencia_csv_toml.rs`
+- `src/bin/bonus_sqlite_rusqlite.rs`
+- `src/bin/bonus_backend_axum_modular/main.rs`
+- `src/bin/reto_22_modularizado/main.rs`
+- `src/bin/reto_30_cli_tareas.rs`
+- `tests/integracion_curso.rs`
 
 ## Nota
 
-No todos los archivos se listan aqui, pero todo `src/` y `tests/` se copian al sitio.
+El codigo real vive en el repositorio local. Esta pagina funciona como indice de navegacion.

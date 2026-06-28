@@ -78,7 +78,7 @@ Ya tienes ejemplos de tres niveles:
 
 Y ahora tambien una libreria reutilizable en:
 
-- [src/lib.rs](../referencia/codigo/src/lib.rs)
+- src/lib.rs (`src/lib.rs`)
 
 ## Meta real del refactor
 

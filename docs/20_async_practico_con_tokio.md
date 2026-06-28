@@ -109,3 +109,9 @@ Hazlo cuando el cuello real sea la espera por I O, no antes.
 ## Cierre
 
 Async en Rust merece la pena, pero gana mucho cuando llegas con buena base previa.
+
+## Siguiente paso recomendable
+
+Una vez te sientas comodo con esta capa, pasa a:
+
+- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)

@@ -51,6 +51,10 @@ Objetivo:
 - entrar al backend con Rust
 - trabajar con handlers y serializacion
 
+Cruce util en este repo:
+
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
+
 Crates recomendadas:
 
 - `axum`
@@ -64,6 +68,10 @@ Objetivo:
 - practicar `Result`
 - parseo JSON
 - trabajo con red
+
+Cruce util en este repo:
+
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
 
 Crates recomendadas:
 

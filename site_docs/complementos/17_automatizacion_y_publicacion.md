@@ -4,7 +4,7 @@ Este documento resume como trabajar el curso con comandos repetibles y como publ
 
 ## Automatizacion local
 
-El repositorio incluye un [Makefile](../referencia/infra/Makefile) con objetivos utiles.
+El repositorio incluye un Makefile (`Makefile`) con objetivos utiles.
 
 ### Objetivos principales
 
@@ -33,14 +33,14 @@ Ejecuta esta secuencia:
 
 Para mantener reproducible la capa web, MkDocs queda fijado en:
 
-- [requirements-docs.txt](../referencia/infra/requirements-docs.txt)
+- requirements-docs.txt (`requirements-docs.txt`)
 
 ## GitHub Actions
 
 Hay dos workflows:
 
-- [CI](../referencia/infra/workflows/ci.yml)
-- [GitHub Pages](../referencia/infra/workflows/pages.yml)
+- CI (`.github/workflows/ci.yml`)
+- GitHub Pages (`.github/workflows/pages.yml`)
 
 ### CI
 

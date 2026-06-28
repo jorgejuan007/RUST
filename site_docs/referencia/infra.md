@@ -4,11 +4,15 @@ Esta seccion recopila los archivos de soporte para automatizacion local, CI y pu
 
 ## Archivos clave
 
-- [Cargo.toml](infra/Cargo.toml)
-- [Cargo.lock](infra/Cargo.lock)
-- [Makefile](infra/Makefile)
-- [mkdocs.yml](infra/mkdocs.yml)
-- [requirements-docs.txt](infra/requirements-docs.txt)
-- [sync_mkdocs.py](infra/scripts/sync_mkdocs.py)
-- [CI workflow](infra/workflows/ci.yml)
-- [Pages workflow](infra/workflows/pages.yml)
+- `Cargo.toml`
+- `Cargo.lock`
+- `Makefile`
+- `mkdocs.yml`
+- `requirements-docs.txt`
+- `scripts/sync_mkdocs.py`
+- `.github/workflows/ci.yml`
+- `.github/workflows/pages.yml`
+
+## Nota
+
+La infraestructura real se mantiene en el repositorio local. Esta pagina funciona como mapa rapido.

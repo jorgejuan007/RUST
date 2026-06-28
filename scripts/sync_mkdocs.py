@@ -13,11 +13,10 @@ REF = DEST / "referencia"
 REF_CODE = REF / "codigo"
 REF_DATA = REF / "data"
 REF_INFRA = REF / "infra"
-REF_INFRA_WORKFLOWS = REF_INFRA / "workflows"
-REF_INFRA_SCRIPTS = REF_INFRA / "scripts"
 
-ABS_LINK_RE = re.compile(r"\[([^\]]+)\]\((/Users/legalintermedia/Documents/GitHub/RUST[^)]+)\)")
-
+ABS_LINK_RE = re.compile(
+    rf"\[([^\]]+)\]\(({re.escape(ROOT.as_posix())}[^)]+)\)"
+)
 
 def ensure_clean_dir(path: Path) -> None:
     if path.exists():
@@ -38,88 +37,9 @@ def source_to_dest_map() -> dict[Path, Path]:
         mapping[doc] = COMP / doc.name
 
     return mapping
-
-
-def copy_reference_files() -> None:
-    for src_file in (ROOT / "src").rglob("*.rs"):
-        dest_file = REF_CODE / "src" / src_file.relative_to(ROOT / "src")
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src_file, dest_file)
-
-    for test_file in (ROOT / "tests").rglob("*.rs"):
-        dest_file = REF_CODE / "tests" / test_file.relative_to(ROOT / "tests")
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(test_file, dest_file)
-
-    for data_file in (ROOT / "data").rglob("*"):
-        if data_file.is_dir():
-            continue
-        dest_file = REF_DATA / data_file.relative_to(ROOT / "data")
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(data_file, dest_file)
-
-    flat_infra_files = [
-        ROOT / "Cargo.toml",
-        ROOT / "Cargo.lock",
-        ROOT / "Makefile",
-        ROOT / "mkdocs.yml",
-        ROOT / "requirements-docs.txt",
-    ]
-
-    for infra_file in flat_infra_files:
-        dest_file = REF_INFRA / infra_file.relative_to(ROOT)
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(infra_file, dest_file)
-
-    workflow_files = {
-        ROOT / ".github" / "workflows" / "ci.yml": REF_INFRA_WORKFLOWS / "ci.yml",
-        ROOT / ".github" / "workflows" / "pages.yml": REF_INFRA_WORKFLOWS / "pages.yml",
-    }
-
-    for infra_file, dest_file in workflow_files.items():
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(infra_file, dest_file)
-
-    for script_file in (ROOT / "scripts").rglob("*.py"):
-        dest_file = REF_INFRA_SCRIPTS / script_file.relative_to(ROOT / "scripts")
-        dest_file.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(script_file, dest_file)
-
-
 def target_for_abs_path(abs_path: Path, mapping: dict[Path, Path]) -> Path:
     if abs_path in mapping:
         return mapping[abs_path]
-
-    if abs_path.is_relative_to(ROOT / "src"):
-        return REF_CODE / "src" / abs_path.relative_to(ROOT / "src")
-
-    if abs_path.is_relative_to(ROOT / "tests"):
-        return REF_CODE / "tests" / abs_path.relative_to(ROOT / "tests")
-
-    if abs_path.is_relative_to(ROOT / "data"):
-        return REF_DATA / abs_path.relative_to(ROOT / "data")
-
-    flat_infra_files = {
-        ROOT / "Cargo.toml",
-        ROOT / "Cargo.lock",
-        ROOT / "Makefile",
-        ROOT / "mkdocs.yml",
-        ROOT / "requirements-docs.txt",
-    }
-
-    if abs_path in flat_infra_files:
-        return REF_INFRA / abs_path.relative_to(ROOT)
-
-    workflow_files = {
-        ROOT / ".github" / "workflows" / "ci.yml": REF_INFRA_WORKFLOWS / "ci.yml",
-        ROOT / ".github" / "workflows" / "pages.yml": REF_INFRA_WORKFLOWS / "pages.yml",
-    }
-
-    if abs_path in workflow_files:
-        return workflow_files[abs_path]
-
-    if abs_path.is_relative_to(ROOT / "scripts"):
-        return REF_INFRA_SCRIPTS / abs_path.relative_to(ROOT / "scripts")
 
     raise ValueError(f"No se pudo mapear el enlace absoluto: {abs_path}")
 
@@ -130,9 +50,14 @@ def rewrite_markdown(text: str, source: Path, mapping: dict[Path, Path]) -> str:
     def repl(match: re.Match[str]) -> str:
         label, target = match.groups()
         abs_target = Path(target)
-        rendered = target_for_abs_path(abs_target, mapping)
-        rel = Path(shutil.os.path.relpath(rendered, source_dest.parent)).as_posix()
-        return f"[{label}]({rel})"
+
+        if abs_target.suffix == ".md":
+            rendered = target_for_abs_path(abs_target, mapping)
+            rel = Path(shutil.os.path.relpath(rendered, source_dest.parent)).as_posix()
+            return f"[{label}]({rel})"
+
+        rel_to_root = abs_target.relative_to(ROOT).as_posix()
+        return f"{label} (`{rel_to_root}`)"
 
     return ABS_LINK_RE.sub(repl, text)
 
@@ -151,7 +76,7 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - retos extra
 - soluciones orientativas
 - soluciones completas ejecutables
-- bonus practicos y una capa avanzada con `clap`, `serde`, `thiserror` y `tokio`
+- bonus practicos y una capa avanzada con `clap`, `serde`, `thiserror`, `tokio`, `reqwest`, `axum`, `csv`, `toml` y `rusqlite`
 
 ## Ruta recomendada
 
@@ -170,6 +95,10 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - [Binarios y comandos](referencia/binarios.md)
 - [Automatizacion y publicacion](complementos/17_automatizacion_y_publicacion.md)
 - [Ruta intermedia](complementos/18_errores_io_y_anyhow.md)
+- [Backend local](complementos/23_backend_local_con_axum_y_reqwest.md)
+- [Persistencia](complementos/24_persistencia_con_csv_y_toml.md)
+- [SQLite](complementos/25_sqlite_con_rusqlite.md)
+- [Backend modular](complementos/26_backend_axum_modular_y_storage.md)
 """,
         encoding="utf-8",
     )
@@ -224,6 +153,10 @@ cargo run --bin bonus_async_tokio
 cargo run --bin bonus_errores_io_anyhow
 cargo run --bin bonus_smart_pointers
 cargo run --bin bonus_async_tokio_avanzado
+cargo run --bin bonus_backend_axum_reqwest
+cargo run --bin bonus_persistencia_csv_toml
+cargo run --bin bonus_sqlite_rusqlite
+cargo run --bin bonus_backend_axum_modular
 ```
 
 ## Retos completos
@@ -250,7 +183,7 @@ mkdocs build --strict
     (REF / "index.md").write_text(
         """# Referencia de Codigo y Datos
 
-Para mantener este sitio navegable, el codigo fuente y los archivos de datos usados por el curso se copian dentro del arbol de MkDocs.
+Esta seccion sirve como mapa rapido del codigo fuente, los datos de ejemplo y la infraestructura del repositorio.
 
 ## Rutas disponibles
 
@@ -267,23 +200,27 @@ Consulta esta seccion cuando un documento del curso te mande a revisar un archiv
     (REF / "codigo.md").write_text(
         """# Guia de Codigo Fuente
 
-El sitio copia el codigo del repositorio bajo `referencia/codigo/src/` para que los enlaces desde la documentacion funcionen en web.
+El sitio web no duplica el codigo Rust. En su lugar, resume las rutas mas utiles del repositorio para que puedas localizar rapidamente cada ejemplo.
 
 ## Puntos de entrada utiles
 
-- [src/lib.rs](codigo/src/lib.rs)
-- [src/main.rs](codigo/src/main.rs)
-- [src/bin/bonus_gestor_tareas_json.rs](codigo/src/bin/bonus_gestor_tareas_json.rs)
-- [src/bin/bonus_errores_io_anyhow.rs](codigo/src/bin/bonus_errores_io_anyhow.rs)
-- [src/bin/bonus_smart_pointers.rs](codigo/src/bin/bonus_smart_pointers.rs)
-- [src/bin/bonus_async_tokio_avanzado.rs](codigo/src/bin/bonus_async_tokio_avanzado.rs)
-- [src/bin/reto_22_modularizado/main.rs](codigo/src/bin/reto_22_modularizado/main.rs)
-- [src/bin/reto_30_cli_tareas.rs](codigo/src/bin/reto_30_cli_tareas.rs)
-- [tests/integracion_curso.rs](codigo/tests/integracion_curso.rs)
+- `src/lib.rs`
+- `src/main.rs`
+- `src/bin/bonus_gestor_tareas_json.rs`
+- `src/bin/bonus_errores_io_anyhow.rs`
+- `src/bin/bonus_smart_pointers.rs`
+- `src/bin/bonus_async_tokio_avanzado.rs`
+- `src/bin/bonus_backend_axum_reqwest.rs`
+- `src/bin/bonus_persistencia_csv_toml.rs`
+- `src/bin/bonus_sqlite_rusqlite.rs`
+- `src/bin/bonus_backend_axum_modular/main.rs`
+- `src/bin/reto_22_modularizado/main.rs`
+- `src/bin/reto_30_cli_tareas.rs`
+- `tests/integracion_curso.rs`
 
 ## Nota
 
-No todos los archivos se listan aqui, pero todo `src/` y `tests/` se copian al sitio.
+El codigo real vive en el repositorio local. Esta pagina funciona como indice de navegacion.
 """,
         encoding="utf-8",
     )
@@ -291,17 +228,23 @@ No todos los archivos se listan aqui, pero todo `src/` y `tests/` se copian al s
     (REF / "data.md").write_text(
         """# Guia de Archivos de Datos
 
-Los ejemplos del curso usan varios archivos de apoyo copiados bajo `referencia/data/`.
+Los ejemplos del curso usan varios archivos de apoyo guardados en `data/` dentro del repositorio.
 
 ## Archivos destacados
 
-- [bonus_tareas.json](data/bonus_tareas.json)
-- [bonus_tareas.tsv](data/bonus_tareas.tsv)
-- [bonus_numeros.txt](data/bonus_numeros.txt)
-- [dia_18_datos.txt](data/dia_18_datos.txt)
-- [dia_21_texto.txt](data/dia_21_texto.txt)
-- [reto_18_lineas.txt](data/reto_18_lineas.txt)
-- [reto_30_tareas_cli.tsv](data/reto_30_tareas_cli.tsv)
+- `data/bonus_tareas.json`
+- `data/bonus_tareas.tsv`
+- `data/bonus_numeros.txt`
+- `data/bonus_tareas.csv`
+- `data/bonus_config.toml`
+- `data/dia_18_datos.txt`
+- `data/dia_21_texto.txt`
+- `data/reto_18_lineas.txt`
+- `data/reto_30_tareas_cli.tsv`
+
+## Nota
+
+Estos archivos se referencian desde el curso y siguen viviendo en el repositorio local.
 """,
         encoding="utf-8",
     )
@@ -313,14 +256,18 @@ Esta seccion recopila los archivos de soporte para automatizacion local, CI y pu
 
 ## Archivos clave
 
-- [Cargo.toml](infra/Cargo.toml)
-- [Cargo.lock](infra/Cargo.lock)
-- [Makefile](infra/Makefile)
-- [mkdocs.yml](infra/mkdocs.yml)
-- [requirements-docs.txt](infra/requirements-docs.txt)
-- [sync_mkdocs.py](infra/scripts/sync_mkdocs.py)
-- [CI workflow](infra/workflows/ci.yml)
-- [Pages workflow](infra/workflows/pages.yml)
+- `Cargo.toml`
+- `Cargo.lock`
+- `Makefile`
+- `mkdocs.yml`
+- `requirements-docs.txt`
+- `scripts/sync_mkdocs.py`
+- `.github/workflows/ci.yml`
+- `.github/workflows/pages.yml`
+
+## Nota
+
+La infraestructura real se mantiene en el repositorio local. Esta pagina funciona como mapa rapido.
 """,
         encoding="utf-8",
     )
@@ -365,16 +312,7 @@ code {
 
 def main() -> None:
     ensure_clean_dir(DEST)
-    for path in [
-        COURSE,
-        COMP,
-        REF,
-        REF_CODE,
-        REF_DATA,
-        REF_INFRA,
-        REF_INFRA_WORKFLOWS,
-        REF_INFRA_SCRIPTS,
-    ]:
+    for path in [COURSE, COMP, REF, REF_CODE, REF_DATA, REF_INFRA]:
         path.mkdir(parents=True, exist_ok=True)
 
     mapping = source_to_dest_map()
@@ -384,7 +322,6 @@ def main() -> None:
         text = source.read_text(encoding="utf-8")
         dest.write_text(rewrite_markdown(text, source, mapping), encoding="utf-8")
 
-    copy_reference_files()
     write_static_pages()
 
 

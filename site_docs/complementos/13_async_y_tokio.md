@@ -84,7 +84,7 @@ cargo run --bin bonus_async_tokio
 
 Archivo relacionado:
 
-- [src/bin/bonus_async_tokio.rs](../referencia/codigo/src/bin/bonus_async_tokio.rs)
+- src/bin/bonus_async_tokio.rs (`src/bin/bonus_async_tokio.rs`)
 - [docs/20_async_practico_con_tokio.md](20_async_practico_con_tokio.md)
 
 ## Cuando usar async

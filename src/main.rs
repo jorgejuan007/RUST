@@ -41,6 +41,10 @@ fn main() {
         "bonus_errores_io_anyhow",
         "bonus_smart_pointers",
         "bonus_async_tokio_avanzado",
+        "bonus_backend_axum_reqwest",
+        "bonus_persistencia_csv_toml",
+        "bonus_sqlite_rusqlite",
+        "bonus_backend_axum_modular",
     ];
     let retos = [
         "reto_01_operaciones_extra",
@@ -89,6 +93,10 @@ fn main() {
     println!("cargo run --bin bonus_errores_io_anyhow");
     println!("cargo run --bin bonus_smart_pointers");
     println!("cargo run --bin bonus_async_tokio_avanzado");
+    println!("cargo run --bin bonus_backend_axum_reqwest");
+    println!("cargo run --bin bonus_persistencia_csv_toml");
+    println!("cargo run --bin bonus_sqlite_rusqlite");
+    println!("cargo run --bin bonus_backend_axum_modular");
     println!("Retos completos:");
     println!("cargo run --bin reto_01_operaciones_extra");
     println!("cargo run --bin reto_22_modularizado");

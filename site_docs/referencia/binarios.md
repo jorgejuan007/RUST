@@ -23,6 +23,10 @@ cargo run --bin bonus_async_tokio
 cargo run --bin bonus_errores_io_anyhow
 cargo run --bin bonus_smart_pointers
 cargo run --bin bonus_async_tokio_avanzado
+cargo run --bin bonus_backend_axum_reqwest
+cargo run --bin bonus_persistencia_csv_toml
+cargo run --bin bonus_sqlite_rusqlite
+cargo run --bin bonus_backend_axum_modular
 ```
 
 ## Retos completos

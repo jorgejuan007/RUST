@@ -1,7 +1,0 @@
-Rust
-
-aprendizaje practico
-
-ownership
-borrowing
-

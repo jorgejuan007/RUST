@@ -9,7 +9,7 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - retos extra
 - soluciones orientativas
 - soluciones completas ejecutables
-- bonus practicos y una capa avanzada con `clap`, `serde`, `thiserror` y `tokio`
+- bonus practicos y una capa avanzada con `clap`, `serde`, `thiserror`, `tokio`, `reqwest`, `axum`, `csv`, `toml` y `rusqlite`
 
 ## Ruta recomendada
 
@@ -28,3 +28,7 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - [Binarios y comandos](referencia/binarios.md)
 - [Automatizacion y publicacion](complementos/17_automatizacion_y_publicacion.md)
 - [Ruta intermedia](complementos/18_errores_io_y_anyhow.md)
+- [Backend local](complementos/23_backend_local_con_axum_y_reqwest.md)
+- [Persistencia](complementos/24_persistencia_con_csv_y_toml.md)
+- [SQLite](complementos/25_sqlite_con_rusqlite.md)
+- [Backend modular](complementos/26_backend_axum_modular_y_storage.md)

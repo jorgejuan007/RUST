@@ -1,6 +1,6 @@
 # Referencia de Codigo y Datos
 
-Para mantener este sitio navegable, el codigo fuente y los archivos de datos usados por el curso se copian dentro del arbol de MkDocs.
+Esta seccion sirve como mapa rapido del codigo fuente, los datos de ejemplo y la infraestructura del repositorio.
 
 ## Rutas disponibles
 

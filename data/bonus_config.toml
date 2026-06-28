@@ -1,0 +1,8 @@
+[curso]
+autor = "Legal Intermedia"
+modo = "persistencia-local"
+
+[export]
+incluir_hechas = false
+limite = 3
+archivo_salida = "target/bonus_export_tareas.csv"

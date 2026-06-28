@@ -22,10 +22,10 @@ Todos ellos ya tienen sentido real en este repositorio.
 
 ## Artefactos utiles de este repo
 
-- [Cargo.toml](../referencia/infra/Cargo.toml)
-- [Makefile](../referencia/infra/Makefile)
-- [src/lib.rs](../referencia/codigo/src/lib.rs)
-- [src/main.rs](../referencia/codigo/src/main.rs)
+- Cargo.toml (`Cargo.toml`)
+- Makefile (`Makefile`)
+- src/lib.rs (`src/lib.rs`)
+- src/main.rs (`src/main.rs`)
 
 ## `Cargo.toml` como contrato
 
@@ -73,7 +73,7 @@ cargo doc --no-deps
 
 Ya tienes automatizacion util en:
 
-- [Makefile](../referencia/infra/Makefile)
+- Makefile (`Makefile`)
 
 La idea correcta es convertir tareas repetibles en comandos cortos.
 
@@ -108,8 +108,8 @@ Primero agota bien:
 Este curso ya conecta Cargo con automatizacion real:
 
 - [docs/17_automatizacion_y_publicacion.md](17_automatizacion_y_publicacion.md)
-- [scripts/sync_mkdocs.py](../referencia/infra/scripts/sync_mkdocs.py)
-- [.github/workflows/ci.yml](../referencia/infra/workflows/ci.yml)
+- scripts/sync_mkdocs.py (`scripts/sync_mkdocs.py`)
+- .github/workflows/ci.yml (`.github/workflows/ci.yml`)
 
 ## Flujo recomendable
 
@@ -124,3 +124,10 @@ make ci
 ## Cierre
 
 Dominar Cargo te ahorra una cantidad enorme de friccion. En proyectos reales, esa soltura cuenta tanto como la sintaxis.
+
+## Cruce recomendado
+
+Esta capa encaja especialmente bien con:
+
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
+- [docs/24_persistencia_con_csv_y_toml.md](24_persistencia_con_csv_y_toml.md)

@@ -37,6 +37,10 @@ Documentacion complementaria recomendada:
 - `docs/20_async_practico_con_tokio.md`
 - `docs/21_tests_de_integracion_y_doctests.md`
 - `docs/22_cargo_profesional_y_workspaces.md`
+- `docs/23_backend_local_con_axum_y_reqwest.md`
+- `docs/24_persistencia_con_csv_y_toml.md`
+- `docs/25_sqlite_con_rusqlite.md`
+- `docs/26_backend_axum_modular_y_storage.md`
 
 ## Dia 1. Hola Rust y Cargo
 

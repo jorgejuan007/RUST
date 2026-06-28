@@ -26,6 +26,10 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 - [20_async_practico_con_tokio.md](20_async_practico_con_tokio.md)
 - [21_tests_de_integracion_y_doctests.md](21_tests_de_integracion_y_doctests.md)
 - [22_cargo_profesional_y_workspaces.md](22_cargo_profesional_y_workspaces.md)
+- [23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
+- [24_persistencia_con_csv_y_toml.md](24_persistencia_con_csv_y_toml.md)
+- [25_sqlite_con_rusqlite.md](25_sqlite_con_rusqlite.md)
+- [26_backend_axum_modular_y_storage.md](26_backend_axum_modular_y_storage.md)
 
 ## Orden recomendado
 
@@ -36,4 +40,6 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 5. Compara con las soluciones de retos solo despues de intentarlo.
 6. Usa el glosario y las preguntas de repaso para fijar conceptos.
 7. Entra en la capa intermedia con errores/I O, smart pointers, async practico, testing y Cargo.
-8. Cierra con la evaluacion final y la guia de proyectos para construir algo propio.
+8. Da el salto a aplicaciones reales con backend local y persistencia de archivos.
+9. Pasa a SQLite y a una organizacion modular de backend cuando quieras endurecer el proyecto.
+10. Cierra con la evaluacion final y la guia de proyectos para construir algo propio.

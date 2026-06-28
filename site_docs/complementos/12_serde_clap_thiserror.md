@@ -96,9 +96,9 @@ Un flujo muy tipico es:
 
 Mira estos archivos:
 
-- [src/bin/bonus_gestor_tareas_json.rs](../referencia/codigo/src/bin/bonus_gestor_tareas_json.rs)
-- [src/lib.rs](../referencia/codigo/src/lib.rs)
-- [data/bonus_tareas.json](../referencia/data/bonus_tareas.json)
+- src/bin/bonus_gestor_tareas_json.rs (`src/bin/bonus_gestor_tareas_json.rs`)
+- src/lib.rs (`src/lib.rs`)
+- data/bonus_tareas.json (`data/bonus_tareas.json`)
 
 ## Lecciones practicas
 

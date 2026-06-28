@@ -1,6 +1,0 @@
-# Valores de ejemplo para bonus_errores_io_anyhow
-10
-25
-
-40
-18

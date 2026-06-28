@@ -48,6 +48,10 @@ nav:
       - Async practico con Tokio: complementos/20_async_practico_con_tokio.md
       - Tests de integracion y doctests: complementos/21_tests_de_integracion_y_doctests.md
       - Cargo profesional y workspaces: complementos/22_cargo_profesional_y_workspaces.md
+      - Backend local con axum y reqwest: complementos/23_backend_local_con_axum_y_reqwest.md
+      - Persistencia con CSV y TOML: complementos/24_persistencia_con_csv_y_toml.md
+      - SQLite con rusqlite: complementos/25_sqlite_con_rusqlite.md
+      - Backend axum modular y storage: complementos/26_backend_axum_modular_y_storage.md
   - Referencia:
       - Codigo y datos: referencia/index.md
       - Guia de codigo fuente: referencia/codigo.md

@@ -1,3 +1,5 @@
+// Este reto muestra fold de forma explicita; sum() se estudia como alternativa.
+#[allow(clippy::unnecessary_fold)]
 fn suma(valores: &[i32]) -> i32 {
     valores.iter().fold(0, |acc, n| acc + n)
 }

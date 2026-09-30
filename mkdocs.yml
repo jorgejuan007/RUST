@@ -1,7 +1,16 @@
 site_name: Curso de Rust en 30 Dias
 site_description: Curso practico de Rust con 30 dias, retos, soluciones y material complementario
+site_url: https://jorgejuan007.github.io/RUST/
+repo_url: https://github.com/jorgejuan007/RUST
+edit_uri: ""
 docs_dir: site_docs
 site_dir: site
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn
 theme:
   name: readthedocs
 extra_css:
@@ -32,6 +41,8 @@ nav:
       - Antipatrones y buenas practicas: complementos/09_antipatrones_y_buenas_practicas.md
       - Evaluacion final: complementos/11_evaluacion_final_y_rubrica.md
   - Practica:
+      - Ejercicios corregibles: practica/index.md
+      - Guia de correccion: complementos/27_practica_con_correccion.md
       - Retos extra: complementos/05_retos_extra_30_dias.md
       - Soluciones orientativas: complementos/10_soluciones_a_retos_extra.md
       - Soluciones ejecutables: complementos/16_soluciones_completas_ejecutables.md
@@ -52,6 +63,8 @@ nav:
       - Persistencia con CSV y TOML: complementos/24_persistencia_con_csv_y_toml.md
       - SQLite con rusqlite: complementos/25_sqlite_con_rusqlite.md
       - Backend axum modular y storage: complementos/26_backend_axum_modular_y_storage.md
+      - Proyecto final persistente: complementos/28_proyecto_tareas_persistente.md
+      - Copias y contrato API: complementos/29_copias_y_contrato_api.md
   - Referencia:
       - Codigo y datos: referencia/index.md
       - Guia de codigo fuente: referencia/codigo.md

@@ -9,7 +9,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 
 #[test]
 fn fibonacci_desde_api_publica() {
-    assert_eq!(fibonacci(7), vec![0, 1, 1, 2, 3, 5, 8]);
+    assert_eq!(fibonacci(7), Ok(vec![0, 1, 1, 2, 3, 5, 8]));
 }
 
 #[test]

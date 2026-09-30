@@ -3,10 +3,7 @@ fn es_par(n: i32) -> bool {
 }
 
 fn primera_palabra(texto: &str) -> &str {
-    match texto.split_whitespace().next() {
-        Some(palabra) => palabra,
-        None => "",
-    }
+    texto.split_whitespace().next().unwrap_or_default()
 }
 
 fn main() {

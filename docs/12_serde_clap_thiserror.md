@@ -96,9 +96,9 @@ Un flujo muy tipico es:
 
 Mira estos archivos:
 
-- [src/bin/bonus_gestor_tareas_json.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_gestor_tareas_json.rs)
-- [src/lib.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/lib.rs)
-- [data/bonus_tareas.json](/Users/legalintermedia/Documents/GitHub/RUST/data/bonus_tareas.json)
+- [src/bin/bonus_gestor_tareas_json.rs](../src/bin/bonus_gestor_tareas_json.rs)
+- [src/lib.rs](../src/lib.rs)
+- [data/bonus_tareas.json](../data/bonus_tareas.json)
 
 ## Lecciones practicas
 
@@ -141,5 +141,5 @@ Eso justamente ya esta representado en este repositorio.
 
 Despues de este documento, enlaza bien con:
 
-- [docs/18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
-- [docs/22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)
+- [docs/18_errores_io_y_anyhow.md](18_errores_io_y_anyhow.md)
+- [docs/22_cargo_profesional_y_workspaces.md](22_cargo_profesional_y_workspaces.md)

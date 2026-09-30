@@ -1,98 +1,43 @@
-# Backend `axum` Modular y Storage
+# Backend modular y almacenamiento compartido
 
-La primera demo de backend local mostraba el circuito completo. Esta segunda capa enseña como empezar a organizarlo mejor.
+El backend evolucionó de una demostración en memoria a un servidor persistente.
+El proceso permanece activo hasta Ctrl+C y conserva las tareas en SQLite.
 
-## Objetivo real
+## Responsabilidades
 
-No se trata de hacer "mas archivos" por decorar.
+- [Modelos](https://github.com/jorgejuan007/RUST/blob/main/src/api/models.rs): tareas, cambios y páginas de resultados.
+- [Storage](https://github.com/jorgejuan007/RUST/blob/main/src/api/storage.rs): esquema, validación y consultas SQLite.
+- [Handlers](https://github.com/jorgejuan007/RUST/blob/main/src/api/handlers.rs): conversión de HTTP a operaciones del storage.
+- [Errores](https://github.com/jorgejuan007/RUST/blob/main/src/api/error.rs): respuestas JSON coherentes.
+- [Router](https://github.com/jorgejuan007/RUST/blob/main/src/api/mod.rs): rutas componibles y comprobables sin abrir puertos.
+- [Servidor](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_backend_axum_modular/main.rs): configuración y cierre ordenado.
+- [Cliente](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_backend_axum_cliente.rs): llamadas HTTP independientes.
+- [CLI SQLite](https://github.com/jorgejuan007/RUST/blob/main/src/bin/proyecto_tareas_cli.rs): reutiliza el mismo storage.
 
-Se trata de separar responsabilidades:
-
-- modelos
-- handlers
-- estado compartido
-- storage
-- arranque del servidor
-
-## Demo ejecutable del repo
-
-Carpeta:
-
-- src/bin/bonus_backend_axum_modular/main.rs (`src/bin/bonus_backend_axum_modular/main.rs`)
-
-Archivos asociados:
-
-- models.rs (`src/bin/bonus_backend_axum_modular/models.rs`)
-- handlers.rs (`src/bin/bonus_backend_axum_modular/handlers.rs`)
-- state.rs (`src/bin/bonus_backend_axum_modular/state.rs`)
-- storage.rs (`src/bin/bonus_backend_axum_modular/storage.rs`)
-
-Ejecuta:
+## Arranque
 
 ```bash
 cargo run --bin bonus_backend_axum_modular
 ```
 
-Ese bonus:
+En otra terminal:
 
-- levanta una API local
-- separa handlers del storage
-- expone `/salud`, `/tasks`, `/tasks/{id}` y `/stats`
-- valida titulos vacios con `400 BAD REQUEST`
-- prueba su propio flujo con `reqwest`
+```bash
+cargo run --bin bonus_backend_axum_cliente -- health
+cargo run --bin bonus_backend_axum_cliente -- add "Practicar persistencia"
+cargo run --bin bonus_backend_axum_cliente -- list
+```
 
-## Por que esta estructura escala mejor
+El servidor utiliza `127.0.0.1:3000` y `target/tasks.sqlite3` por defecto. Puedes cambiar
+ambos con `--bind` y `--db`. No inserta tareas de ejemplo ni borra la base al arrancar.
+Para conservar datos fuera de los artefactos de compilación, elige una ruta propia
+con `--db`; `cargo clean` elimina el directorio `target/`.
 
-### `models.rs`
+## Trabajo async y SQLite
 
-Agrupa los tipos del dominio y del transporte.
+El store comparte una conexión mediante `Arc<Mutex<Connection>>`. Los handlers
+usan `spawn_blocking` para que las operaciones SQLite síncronas no bloqueen los workers
+async de Tokio. Los listados consultan el total y la página dentro de una transacción.
+Las consultas usan parámetros; la búsqueda normaliza Unicode a minúsculas en Rust.
 
-### `storage.rs`
-
-Centraliza operaciones de lectura, insercion y estadisticas.
-
-### `state.rs`
-
-Declara de forma clara que parte del estado comparten los handlers.
-
-### `handlers.rs`
-
-Convierte HTTP en llamadas a tu logica.
-
-### `main.rs`
-
-Se queda sobre todo con:
-
-- composicion
-- rutas
-- arranque del servidor
-- demo cliente
-
-## Regla practica muy util
-
-Cuando una API empieza a crecer, `main.rs` deberia adelgazar y `storage` deberia absorber cada vez mas logica reutilizable.
-
-## Anti patrones comunes
-
-- handlers con demasiada logica de negocio
-- estado compartido definido de forma implicita
-- validacion mezclada con serializacion y acceso a datos
-- storage sin una API clara
-
-## Siguiente paso natural
-
-La evolucion mas coherente desde aqui es sustituir el storage en memoria por SQLite.
-
-No hace falta hacerlo en el mismo salto, pero el camino ya queda preparado.
-
-## Cruce recomendado
-
-Este documento enlaza muy bien con:
-
-- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
-- [docs/25_sqlite_con_rusqlite.md](25_sqlite_con_rusqlite.md)
-- [docs/14_arquitectura_y_refactor_en_rust.md](14_arquitectura_y_refactor_en_rust.md)
-
-## Cierre
-
-Separar backend en modulos no es burocracia. Es lo que te permite seguir creciendo sin convertir cada handler en un bloque inmanejable.
+Consulta el [proyecto completo y contrato HTTP](28_proyecto_tareas_persistente.md).

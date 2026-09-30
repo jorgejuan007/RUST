@@ -78,7 +78,7 @@ Ya tienes ejemplos de tres niveles:
 
 Y ahora tambien una libreria reutilizable en:
 
-- src/lib.rs (`src/lib.rs`)
+- [src/lib.rs](https://github.com/jorgejuan007/RUST/blob/main/src/lib.rs)
 
 ## Meta real del refactor
 

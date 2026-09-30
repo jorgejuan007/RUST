@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import re
 import shutil
+import os
 from pathlib import Path
+from urllib.parse import quote, urlsplit, unquote
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,9 +16,8 @@ REF_CODE = REF / "codigo"
 REF_DATA = REF / "data"
 REF_INFRA = REF / "infra"
 
-ABS_LINK_RE = re.compile(
-    rf"\[([^\]]+)\]\(({re.escape(ROOT.as_posix())}[^)]+)\)"
-)
+REPO_URL = "https://github.com/jorgejuan007/RUST"
+LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)\n]+)\)")
 
 def ensure_clean_dir(path: Path) -> None:
     if path.exists():
@@ -29,6 +30,8 @@ def source_to_dest_map() -> dict[Path, Path]:
         ROOT / "README.md": COURSE / "repositorio.md",
         ROOT / "manual_rust_30_dias.md": COURSE / "manual_30_dias.md",
         ROOT / "docs" / "README.md": COMP / "index.md",
+        ROOT / "ejercicios" / "README.md": DEST / "practica" / "index.md",
+        ROOT / "src" / "api" / "openapi.json": DEST / "assets" / "openapi.json",
     }
 
     for doc in sorted((ROOT / "docs").glob("*.md")):
@@ -37,29 +40,28 @@ def source_to_dest_map() -> dict[Path, Path]:
         mapping[doc] = COMP / doc.name
 
     return mapping
-def target_for_abs_path(abs_path: Path, mapping: dict[Path, Path]) -> Path:
-    if abs_path in mapping:
-        return mapping[abs_path]
-
-    raise ValueError(f"No se pudo mapear el enlace absoluto: {abs_path}")
-
-
 def rewrite_markdown(text: str, source: Path, mapping: dict[Path, Path]) -> str:
     source_dest = mapping[source]
 
     def repl(match: re.Match[str]) -> str:
         label, target = match.groups()
-        abs_target = Path(target)
+        url = urlsplit(target)
+        if url.scheme or target.startswith(("#", "//")):
+            return match.group(0)
+        if target.startswith("/"):
+            raise ValueError(f"Enlace no portable en {source.name}: {target}")
+        resolved = (source.parent / unquote(url.path)).resolve()
+        relative = resolved.relative_to(ROOT)
+        if not resolved.exists():
+            raise ValueError(f"Enlace inexistente en {source.name}: {target}")
+        suffix = ("?" + url.query if url.query else "") + ("#" + url.fragment if url.fragment else "")
+        if resolved in mapping:
+            rendered = mapping[resolved]
+            rel = Path(os.path.relpath(rendered, source_dest.parent)).as_posix()
+            return f"[{label}]({quote(rel, safe='/')}{suffix})"
+        return f"[{label}]({REPO_URL}/blob/main/{quote(relative.as_posix(), safe='/')}{suffix})"
 
-        if abs_target.suffix == ".md":
-            rendered = target_for_abs_path(abs_target, mapping)
-            rel = Path(shutil.os.path.relpath(rendered, source_dest.parent)).as_posix()
-            return f"[{label}]({rel})"
-
-        rel_to_root = abs_target.relative_to(ROOT).as_posix()
-        return f"{label} (`{rel_to_root}`)"
-
-    return ABS_LINK_RE.sub(repl, text)
+    return LINK_RE.sub(repl, text)
 
 
 def write_static_pages() -> None:
@@ -99,6 +101,8 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - [Persistencia](complementos/24_persistencia_con_csv_y_toml.md)
 - [SQLite](complementos/25_sqlite_con_rusqlite.md)
 - [Backend modular](complementos/26_backend_axum_modular_y_storage.md)
+- [Ejercicios con corrección automática](practica/index.md)
+- [Proyecto final persistente](complementos/28_proyecto_tareas_persistente.md)
 """,
         encoding="utf-8",
     )
@@ -157,6 +161,8 @@ cargo run --bin bonus_backend_axum_reqwest
 cargo run --bin bonus_persistencia_csv_toml
 cargo run --bin bonus_sqlite_rusqlite
 cargo run --bin bonus_backend_axum_modular
+cargo run --bin bonus_backend_axum_cliente -- health
+cargo run --bin proyecto_tareas_cli -- list
 ```
 
 ## Retos completos
@@ -214,9 +220,15 @@ El sitio web no duplica el codigo Rust. En su lugar, resume las rutas mas utiles
 - `src/bin/bonus_persistencia_csv_toml.rs`
 - `src/bin/bonus_sqlite_rusqlite.rs`
 - `src/bin/bonus_backend_axum_modular/main.rs`
+- `src/api/mod.rs`
+- `src/api/storage.rs`
+- `src/bin/bonus_backend_axum_cliente.rs`
+- `src/bin/proyecto_tareas_cli.rs`
 - `src/bin/reto_22_modularizado/main.rs`
 - `src/bin/reto_30_cli_tareas.rs`
 - `tests/integracion_curso.rs`
+- `tests/api_tareas.rs`
+- `tests/cli_tareas.rs`
 
 ## Nota
 
@@ -319,6 +331,9 @@ def main() -> None:
 
     for source, dest in mapping.items():
         dest.parent.mkdir(parents=True, exist_ok=True)
+        if source.suffix != ".md":
+            shutil.copyfile(source, dest)
+            continue
         text = source.read_text(encoding="utf-8")
         dest.write_text(rewrite_markdown(text, source, mapping), encoding="utf-8")
 

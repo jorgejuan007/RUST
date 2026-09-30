@@ -8,7 +8,7 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - archivos de apoyo en `data/`
 - documentacion complementaria en [docs/README.md](../complementos/index.md)
 - un proyecto bonus mas completo en `bonus_gestor_tareas_std`
-- una libreria reutilizable con modulos y tests en src/lib.rs (`src/lib.rs`)
+- una libreria reutilizable con modulos y tests en [src/lib.rs](https://github.com/jorgejuan007/RUST/blob/main/src/lib.rs)
 - una capa avanzada con `clap`, `serde`, `serde_json` y `thiserror`
 - ejemplos locales de backend con `axum` y `reqwest`
 - ejemplos de persistencia con `csv` y `toml`
@@ -17,6 +17,46 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - automatizacion local con `Makefile` y CI/Pages con GitHub Actions
 
 ## Como usar el curso
+
+Rust se instala con [rustup](https://rust-lang.org/tools/install/). Este proyecto fija
+Rust 1.98.1 con rustfmt y Clippy en `rust-toolchain.toml`; rustup lo selecciona al entrar
+en el repositorio. Para la documentación necesitas Python 3.12 o posterior y las
+dependencias de `requirements-docs.txt`.
+
+## Práctica con corrección automática
+
+Completa las doce plantillas de los días 9–12, 16–20 y 25–27 y comprueba tu respuesta:
+
+```bash
+python3 scripts/practica.py listar
+python3 scripts/practica.py pista 9
+python3 scripts/practica.py comprobar 9
+```
+
+Consulta [los ejercicios](../practica/index.md). Sus `todo!()` son intencionales y no
+impiden ejecutar las pruebas del curso principal.
+
+## Proyecto final: CLI y API persistentes
+
+```bash
+cargo run --bin proyecto_tareas_cli -- add "Practicar Rust"
+cargo run --bin proyecto_tareas_cli -- list
+cargo run --bin bonus_backend_axum_modular
+```
+
+El servidor sigue activo hasta Ctrl+C. En otra terminal:
+
+```bash
+cargo run --bin bonus_backend_axum_cliente -- health
+cargo run --bin bonus_backend_axum_cliente -- list
+```
+
+CLI y API comparten SQLite. Incluyen creación, consulta, edición, borrado, filtros,
+paginación y pruebas HTTP. Sigue la [guía del proyecto](../complementos/28_proyecto_tareas_persistente.md).
+Puedes guardar y recuperar copias JSON conservando los identificadores; la API sirve
+su contrato en `/openapi.json`. Consulta [copias y contrato HTTP](../complementos/29_copias_y_contrato_api.md).
+
+## Ejecutar los ejemplos diarios
 
 Instala Rust y luego, desde la raiz del repo:
 
@@ -86,7 +126,9 @@ make doc-api
 make ci
 ```
 
-`make ci` regenera `site_docs`, ejecuta `cargo check --bins`, `cargo test` y `mkdocs build --strict`.
+`make ci` comprueba formato, Clippy, compilación, pruebas Rust/Python, soluciones de
+ejercicios, contrato OpenAPI, respuestas HTTP reales, enlaces portables y la construcción estricta del sitio. Sigue la
+[guía de automatización y Pages](../complementos/17_automatizacion_y_publicacion.md).
 
 Para correr los tests del dia 23:
 
@@ -186,14 +228,17 @@ cargo run --bin reto_30_cli_tareas -- list
 - Persistencia con CSV y TOML: [docs/24_persistencia_con_csv_y_toml.md](../complementos/24_persistencia_con_csv_y_toml.md)
 - SQLite con rusqlite: [docs/25_sqlite_con_rusqlite.md](../complementos/25_sqlite_con_rusqlite.md)
 - Backend axum modular y storage: [docs/26_backend_axum_modular_y_storage.md](../complementos/26_backend_axum_modular_y_storage.md)
+- Práctica corregible: [docs/27_practica_con_correccion.md](../complementos/27_practica_con_correccion.md)
+- Proyecto final persistente: [docs/28_proyecto_tareas_persistente.md](../complementos/28_proyecto_tareas_persistente.md)
+- Copias y contrato HTTP: [docs/29_copias_y_contrato_api.md](../complementos/29_copias_y_contrato_api.md)
 
 ## Automatizacion y despliegue
 
-- Makefile local: Makefile (`Makefile`)
-- Manifiesto del paquete: Cargo.toml (`Cargo.toml`)
-- Dependencias docs: requirements-docs.txt (`requirements-docs.txt`)
-- CI: .github/workflows/ci.yml (`.github/workflows/ci.yml`)
-- GitHub Pages: .github/workflows/pages.yml (`.github/workflows/pages.yml`)
+- Makefile local: [Makefile](https://github.com/jorgejuan007/RUST/blob/main/Makefile)
+- Manifiesto del paquete: [Cargo.toml](https://github.com/jorgejuan007/RUST/blob/main/Cargo.toml)
+- Dependencias docs: [requirements-docs.txt](https://github.com/jorgejuan007/RUST/blob/main/requirements-docs.txt)
+- CI: [.github/workflows/ci.yml](https://github.com/jorgejuan007/RUST/blob/main/.github/workflows/ci.yml)
+- GitHub Pages: [.github/workflows/pages.yml](https://github.com/jorgejuan007/RUST/blob/main/.github/workflows/pages.yml)
 
 ## Objetivo del repositorio
 

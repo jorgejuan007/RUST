@@ -1,0 +1,8 @@
+[package]
+name = "rust_practica"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Paquete independiente: los TODO del alumno no entran en los tests del curso.
+[workspace]

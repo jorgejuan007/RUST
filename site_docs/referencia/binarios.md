@@ -27,6 +27,8 @@ cargo run --bin bonus_backend_axum_reqwest
 cargo run --bin bonus_persistencia_csv_toml
 cargo run --bin bonus_sqlite_rusqlite
 cargo run --bin bonus_backend_axum_modular
+cargo run --bin bonus_backend_axum_cliente -- health
+cargo run --bin proyecto_tareas_cli -- list
 ```
 
 ## Retos completos

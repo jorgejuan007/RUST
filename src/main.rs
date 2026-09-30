@@ -45,6 +45,8 @@ fn main() {
         "bonus_persistencia_csv_toml",
         "bonus_sqlite_rusqlite",
         "bonus_backend_axum_modular",
+        "bonus_backend_axum_cliente",
+        "proyecto_tareas_cli",
     ];
     let retos = [
         "reto_01_operaciones_extra",
@@ -97,6 +99,10 @@ fn main() {
     println!("cargo run --bin bonus_persistencia_csv_toml");
     println!("cargo run --bin bonus_sqlite_rusqlite");
     println!("cargo run --bin bonus_backend_axum_modular");
+    println!("Servidor persistente: deténlo con Ctrl+C; cliente en otra terminal.");
+    println!("cargo run --bin bonus_backend_axum_cliente -- health");
+    println!("cargo run --bin proyecto_tareas_cli -- list");
+    println!("Práctica corregible: python3 scripts/practica.py listar");
     println!("Retos completos:");
     println!("cargo run --bin reto_01_operaciones_extra");
     println!("cargo run --bin reto_22_modularizado");

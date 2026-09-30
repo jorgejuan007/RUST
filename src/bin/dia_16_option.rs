@@ -3,6 +3,8 @@ struct Task {
     titulo: String,
 }
 
+// Se muestra el bucle antes de introducir Iterator::find en el dia 20.
+#[allow(clippy::manual_find)]
 fn buscar_tarea(tareas: &[Task], id: u32) -> Option<&Task> {
     for tarea in tareas {
         if tarea.id == id {

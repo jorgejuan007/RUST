@@ -45,9 +45,9 @@ Ese corte suele ser mas limpio que meterlo todo en un solo archivo.
 
 Archivos:
 
-- src/bin/bonus_persistencia_csv_toml.rs (`src/bin/bonus_persistencia_csv_toml.rs`)
-- data/bonus_tareas.csv (`data/bonus_tareas.csv`)
-- data/bonus_config.toml (`data/bonus_config.toml`)
+- [src/bin/bonus_persistencia_csv_toml.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_persistencia_csv_toml.rs)
+- [data/bonus_tareas.csv](https://github.com/jorgejuan007/RUST/blob/main/data/bonus_tareas.csv)
+- [data/bonus_config.toml](https://github.com/jorgejuan007/RUST/blob/main/data/bonus_config.toml)
 
 Ejecuta:
 

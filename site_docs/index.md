@@ -32,3 +32,5 @@ Bienvenido al sitio del curso. Esta version web organiza el mismo contenido del 
 - [Persistencia](complementos/24_persistencia_con_csv_y_toml.md)
 - [SQLite](complementos/25_sqlite_con_rusqlite.md)
 - [Backend modular](complementos/26_backend_axum_modular_y_storage.md)
+- [Ejercicios con corrección automática](practica/index.md)
+- [Proyecto final persistente](complementos/28_proyecto_tareas_persistente.md)

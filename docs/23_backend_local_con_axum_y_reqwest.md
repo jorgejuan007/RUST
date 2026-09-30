@@ -47,7 +47,7 @@ Y aun asi sigue siendo un proyecto abordable.
 
 Archivo:
 
-- [src/bin/bonus_backend_axum_reqwest.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_backend_axum_reqwest.rs)
+- [src/bin/bonus_backend_axum_reqwest.rs](../src/bin/bonus_backend_axum_reqwest.rs)
 
 Ejecuta:
 
@@ -127,9 +127,9 @@ Despues de este bonus, la progresion buena suele ser:
 
 Este documento encaja especialmente bien con:
 
-- [docs/20_async_practico_con_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/20_async_practico_con_tokio.md)
-- [docs/24_persistencia_con_csv_y_toml.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/24_persistencia_con_csv_y_toml.md)
-- [docs/26_backend_axum_modular_y_storage.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/26_backend_axum_modular_y_storage.md)
+- [docs/20_async_practico_con_tokio.md](20_async_practico_con_tokio.md)
+- [docs/24_persistencia_con_csv_y_toml.md](24_persistencia_con_csv_y_toml.md)
+- [docs/26_backend_axum_modular_y_storage.md](26_backend_axum_modular_y_storage.md)
 
 ## Cierre
 

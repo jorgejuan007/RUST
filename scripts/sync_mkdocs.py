@@ -31,6 +31,7 @@ def source_to_dest_map() -> dict[Path, Path]:
         ROOT / "manual_rust_30_dias.md": COURSE / "manual_30_dias.md",
         ROOT / "docs" / "README.md": COMP / "index.md",
         ROOT / "ejercicios" / "README.md": DEST / "practica" / "index.md",
+        ROOT / "src" / "api" / "openapi.json": DEST / "assets" / "openapi.json",
     }
 
     for doc in sorted((ROOT / "docs").glob("*.md")):
@@ -330,6 +331,9 @@ def main() -> None:
 
     for source, dest in mapping.items():
         dest.parent.mkdir(parents=True, exist_ok=True)
+        if source.suffix != ".md":
+            shutil.copyfile(source, dest)
+            continue
         text = source.read_text(encoding="utf-8")
         dest.write_text(rewrite_markdown(text, source, mapping), encoding="utf-8")
 

@@ -9,6 +9,7 @@ use axum::{
         Path, Query, State,
     },
     http::StatusCode,
+    response::IntoResponse,
     Json,
 };
 use serde_json::{json, Value};
@@ -35,6 +36,13 @@ fn json_error(error: JsonRejection) -> ApiError {
 
 pub async fn salud() -> Json<Value> {
     Json(json!({"servicio": "curso-rust-modular", "estado": "ok"}))
+}
+
+pub async fn contrato() -> impl IntoResponse {
+    (
+        [("content-type", "application/json; charset=utf-8")],
+        include_str!("openapi.json"),
+    )
 }
 
 pub async fn listar(

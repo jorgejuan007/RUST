@@ -1,6 +1,6 @@
 # Ejercicios con corrección automática
 
-Este paquete independiente contiene nueve ejercicios para los días 9–12 y 16–20.
+Este paquete independiente contiene doce ejercicios para los días 9–12, 16–20 y 25–27.
 Las plantillas compilan, pero sus tests fallan hasta que implementes los `todo!()`.
 Las soluciones están separadas y nunca se copian sobre tu trabajo.
 
@@ -30,6 +30,9 @@ python3 scripts/practica.py comprobar 9
 | 18 | Operador `?` | Errores con línea y sumas comprobadas |
 | 19 | HashMap | Frecuencias normalizadas y palabras Unicode |
 | 20 | Iteradores | Pares negativos y acumulación en `i64` |
+| 25 | Traits | Contrato compartido y tipos adicionales definidos por el alumno |
+| 26 | Genéricos | Valores sin Copy/Clone, slices vacíos y primer empate |
+| 27 | Lifetimes | Unicode y préstamos que siguen ligados al texto original |
 
 Para formatear tu trabajo:
 

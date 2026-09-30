@@ -1,4 +1,4 @@
-.PHONY: help sync-docs docs-serve docs-build check-links fmt lint check test test-doc test-python test-practice doc-api ci practica practica-lista
+.PHONY: help sync-docs docs-serve docs-build check-links fmt lint check test test-doc test-python test-practice test-contract doc-api ci practica practica-lista
 
 DIA ?= 9
 
@@ -7,6 +7,7 @@ help:
 	@echo "make docs-serve / docs-build / sync-docs / check-links"
 	@echo "make fmt / lint / check / test / test-doc / test-python / test-practice / doc-api"
 	@echo "make practica DIA=9 / practica-lista"
+	@echo "make test-contract: contrato OpenAPI y respuestas reales"
 
 sync-docs:
 	python3 scripts/sync_mkdocs.py
@@ -43,6 +44,10 @@ test-python:
 test-practice:
 	python3 scripts/practica.py verificar-soluciones
 
+test-contract:
+	cargo build --locked --bin bonus_backend_axum_modular
+	python3 scripts/check_openapi.py --server target/debug/bonus_backend_axum_modular
+
 practica:
 	python3 scripts/practica.py comprobar $(DIA)
 
@@ -59,4 +64,5 @@ ci:
 	$(MAKE) test
 	$(MAKE) test-python
 	$(MAKE) test-practice
+	$(MAKE) test-contract
 	$(MAKE) docs-build

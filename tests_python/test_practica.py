@@ -15,7 +15,7 @@ class PracticeTests(unittest.TestCase):
 
     def test_catalog_and_three_hints(self):
         catalog = load("practica").catalog()
-        self.assertEqual([lesson["dia"] for lesson in catalog], [9, 10, 11, 12, 16, 17, 18, 19, 20])
+        self.assertEqual([lesson["dia"] for lesson in catalog], [9, 10, 11, 12, 16, 17, 18, 19, 20, 25, 26, 27])
         for lesson in catalog:
             self.assertEqual(len(lesson["pistas"]), 3)
         result = self.command("pista", "12", "--nivel", "2")

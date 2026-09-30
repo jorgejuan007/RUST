@@ -88,5 +88,35 @@
       "n % 2 == 0 también sirve para pares negativos.",
       "Combina iter(), filter(), map() y sum::<i64>()."
     ]
+  },
+  {
+    "dia": 25,
+    "titulo": "Traits y contratos compartidos",
+    "enunciado": "Implementa Resumen para Libro y Tarea. Libro devuelve 'Libro: <titulo> (<autor>)'; Tarea devuelve 'Hecha: <titulo>' o 'Pendiente: <titulo>'. resumir debe usar el trait y funcionar con otros tipos que lo implementen.",
+    "pistas": [
+      "Cada impl Resumen define el mismo método para un tipo distinto.",
+      "Usa format! para Libro y elige el prefijo según hecha para Tarea.",
+      "resumir no necesita conocer structs: llama item.resumen()."
+    ]
+  },
+  {
+    "dia": 26,
+    "titulo": "Genéricos sin copiar valores",
+    "enunciado": "Devuelve un préstamo al primer valor máximo de un slice, o None si está vacío. Usa T: Ord sin añadir Copy ni Clone. En empates conserva el primer máximo.",
+    "pistas": [
+      "first() permite obtener un préstamo al primer valor o None.",
+      "Compara referencias: no necesitas mover los valores fuera del slice.",
+      "Inicializa mayor con valores.first()? y sustitúyelo solo cuando valor > mayor."
+    ]
+  },
+  {
+    "dia": 27,
+    "titulo": "Lifetimes en funciones y structs",
+    "enunciado": "mas_largo devuelve la entrada con más caracteres Unicode; en empate devuelve a. Extracto::primera_linea devuelve un slice de su texto, sin terminador LF o CRLF, que pueda usarse después de destruir el Extracto mientras viva el texto original.",
+    "pistas": [
+      "'a relaciona el resultado con el texto original prestado.",
+      "chars().count() compara caracteres y lines() separa líneas sin terminadores.",
+      "Compara con >= para elegir a en empate; para la primera línea usa lines().next().unwrap_or(\"\")."
+    ]
   }
 ]

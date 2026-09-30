@@ -52,3 +52,25 @@ fn cli_informa_errores_con_codigo_de_salida() {
     }
     assert_eq!(value(run(&path, &["stats"]))["total"], 0);
 }
+
+#[test]
+fn cli_copia_y_recupera_sin_sobrescribir() {
+    let directory = tempfile::tempdir().unwrap();
+    let source = directory.path().join("source.sqlite3");
+    let target = directory.path().join("restored.sqlite3");
+    let backup = directory.path().join("copia con espacios.backup.json");
+    value(run(&source, &["add", "Conservar 🌳"]));
+    value(run(&source, &["done", "1"]));
+    let path = backup.to_str().unwrap();
+    assert_eq!(value(run(&source, &["backup", path]))["tareas"], 1);
+    let before = std::fs::read(&backup).unwrap();
+    assert!(!run(&source, &["backup", path]).status.success());
+    assert_eq!(std::fs::read(&backup).unwrap(), before);
+    assert_eq!(value(run(&target, &["restore", path]))["total"], 1);
+    assert_eq!(value(run(&target, &["get", "1"]))["hecha"], true);
+    assert!(!run(&target, &["restore", path]).status.success());
+    assert_eq!(value(run(&target, &["add", "Segunda"]))["id"], 2);
+    std::fs::write(&backup, "no es JSON").unwrap();
+    assert!(!run(&target, &["restore", path]).status.success());
+    assert_eq!(value(run(&target, &["stats"]))["total"], 2);
+}

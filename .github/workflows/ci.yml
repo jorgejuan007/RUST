@@ -59,6 +59,10 @@ jobs:
           cargo check --locked --manifest-path ejercicios/Cargo.toml
       - name: Reference solutions
         run: python scripts/practica.py verificar-soluciones
+      - name: OpenAPI and real HTTP responses
+        run: |
+          cargo build --locked --bin bonus_backend_axum_modular
+          python scripts/check_openapi.py --server target/debug/bonus_backend_axum_modular
       - name: Generate and verify documentation
         run: |
           python scripts/sync_mkdocs.py

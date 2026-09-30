@@ -1,6 +1,7 @@
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 use rust_30_dias::api::{
+    backup::Backup,
     models::{ListOptions, UpdateTask},
     TaskStore,
 };
@@ -46,6 +47,14 @@ enum Command {
         id: i64,
     },
     Stats,
+    /// Guarda todas las tareas en un archivo JSON nuevo.
+    Backup {
+        archivo: PathBuf,
+    },
+    /// Recupera una copia en una base nueva, sin sustituir datos.
+    Restore {
+        archivo: PathBuf,
+    },
 }
 
 fn main() -> Result<()> {
@@ -91,6 +100,15 @@ fn main() -> Result<()> {
             serde_json::json!({"borrada": id})
         }
         Command::Stats => serde_json::to_value(store.stats()?)?,
+        Command::Backup { archivo } => {
+            let backup = store.snapshot()?;
+            backup.write_new(&archivo)?;
+            serde_json::json!({"archivo": archivo, "tareas": backup.tareas.len(), "ultimo_id": backup.ultimo_id})
+        }
+        Command::Restore { archivo } => {
+            let backup = Backup::read(archivo)?;
+            serde_json::to_value(store.restore(&backup)?)?
+        }
     };
     println!("{}", serde_json::to_string_pretty(&output)?);
     Ok(())

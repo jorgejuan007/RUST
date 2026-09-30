@@ -10,7 +10,9 @@ Consulta el [catálogo y las instrucciones](../practica/index.md).
 1. Completa los días 9, 10, 11 y 12 después del bloque de ownership y borrowing.
 2. Completa los días 16 y 17 para practicar ausencia y errores recuperables.
 3. Resuelve el día 18 sin `unwrap()` y propaga errores con `?`.
-4. Cierra con los días 19 y 20: colecciones e iteradores.
+4. Resuelve los días 19 y 20: colecciones e iteradores.
+5. Después de la teoría de los días 25–27, implementa traits, un máximo genérico
+   que no exija `Copy` y funciones que devuelvan préstamos con lifetimes explícitos.
 
 ```bash
 python3 scripts/practica.py comprobar 12
@@ -30,3 +32,17 @@ de cero cuando hay errores de compilación o pruebas fallidas.
 
 `verificar-soluciones` comprueba todos los modelos de respuesta en una carpeta temporal.
 Este comando forma parte del CI y no resuelve automáticamente tus ejercicios.
+
+## Práctica avanzada
+
+```bash
+python3 scripts/practica.py pista 25
+python3 scripts/practica.py comprobar 25
+python3 scripts/practica.py comprobar 26
+python3 scripts/practica.py comprobar 27
+```
+
+El día 25 comprueba que un tipo nuevo puede implementar el mismo trait. El día 26
+usa también valores que no implementan `Clone`: la función debe devolver un préstamo.
+El día 27 distingue caracteres Unicode de bytes y comprueba que el préstamo de una
+línea depende del texto original, incluso cuando el contenedor `Extracto` ya no existe.

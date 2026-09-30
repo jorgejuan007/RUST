@@ -1,0 +1,608 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "API de tareas del curso Rust",
+    "version": "1.0.0",
+    "description": "API local persistente. CLI y HTTP comparten SQLite. Los mensajes de error internos no exponen detalles de almacenamiento."
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Mismo origen que el servidor"
+    }
+  ],
+  "paths": {
+    "/salud": {
+      "get": {
+        "operationId": "salud",
+        "summary": "Estado del servicio",
+        "responses": {
+          "200": {
+            "description": "Estado del servicio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "operationId": "estadisticas",
+        "summary": "Total de tareas y pendientes",
+        "responses": {
+          "200": {
+            "description": "Total de tareas y pendientes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStats"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "operationId": "listarTareas",
+        "summary": "Lista paginada, ordenada por ID",
+        "responses": {
+          "200": {
+            "description": "Lista paginada, ordenada por ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hecha",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "true o false; omitir incluye ambos estados."
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Búsqueda literal sin distinguir mayúsculas. Máximo 200 caracteres tras recortar espacios y convertir a minúsculas."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295,
+              "default": 0
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "crearTarea",
+        "summary": "Crea una tarea pendiente",
+        "responses": {
+          "201": {
+            "description": "Crea una tarea pendiente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "413": {
+            "$ref": "#/components/responses/Error413"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTask"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maximum": 9223372036854775807
+          }
+        }
+      ],
+      "get": {
+        "operationId": "obtenerTarea",
+        "summary": "Consulta una tarea",
+        "responses": {
+          "200": {
+            "description": "Consulta una tarea",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "editarTarea",
+        "summary": "Edita título, estado o ambos",
+        "responses": {
+          "200": {
+            "description": "Edita título, estado o ambos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "413": {
+            "$ref": "#/components/responses/Error413"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTask"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "borrarTarea",
+        "summary": "Borra una tarea sin reutilizar su ID",
+        "responses": {
+          "204": {
+            "description": "Borra una tarea sin reutilizar su ID"
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "operationId": "contratoOpenApi",
+        "summary": "Este contrato OpenAPI",
+        "responses": {
+          "200": {
+            "description": "Este contrato OpenAPI",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "openapi",
+                    "info",
+                    "paths"
+                  ]
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/Error405"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "titulo",
+          "hecha"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maximum": 9223372036854775807
+          },
+          "titulo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "hecha": {
+            "type": "boolean"
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "titulo": "Aprender Rust",
+            "hecha": false
+          }
+        ]
+      },
+      "NewTask": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "titulo"
+        ],
+        "properties": {
+          "titulo": {
+            "type": "string",
+              "description": "Se recortan los extremos. El resultado debe tener entre 1 y 200 caracteres Unicode, sin NUL; una infracción devuelve 400."
+          }
+        },
+        "examples": [
+          {
+            "titulo": "  Aprender Rust  "
+          }
+        ]
+      },
+      "UpdateTask": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "titulo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "null equivale a omitir. Un título presente se valida como en NewTask."
+          },
+          "hecha": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "null equivale a omitir."
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "titulo"
+            ],
+            "properties": {
+              "titulo": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "required": [
+              "hecha"
+            ],
+            "properties": {
+              "hecha": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "examples": [
+          {
+            "hecha": true
+          },
+          {
+            "titulo": "Revisar API",
+            "hecha": true
+          },
+          {
+            "titulo": null,
+            "hecha": false
+          }
+        ]
+      },
+      "TaskPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tareas",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "tareas": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "examples": [
+          {
+            "tareas": [],
+            "total": 0,
+            "limit": 20,
+            "offset": 0
+          }
+        ]
+      },
+      "TaskStats": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "total",
+          "pendientes"
+        ],
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pendientes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "examples": [
+          {
+            "total": 2,
+            "pendientes": 1
+          }
+        ]
+      },
+      "Health": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "servicio",
+          "estado"
+        ],
+        "properties": {
+          "servicio": {
+            "const": "curso-rust-modular"
+          },
+          "estado": {
+            "const": "ok"
+          }
+        },
+        "examples": [
+          {
+            "servicio": "curso-rust-modular",
+            "estado": "ok"
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "codigo",
+              "mensaje"
+            ],
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "mensaje": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "examples": [
+          {
+            "error": {
+              "codigo": "tarea_no_encontrada",
+              "mensaje": "no existe la tarea 99"
+            }
+          }
+        ]
+      }
+    },
+    "responses": {
+      "Error400": {
+        "description": "ID, título, consulta o JSON sintáctico inválido.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error404": {
+        "description": "La tarea solicitada no existe.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error405": {
+        "description": "El método no está permitido para la ruta.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error413": {
+        "description": "El cuerpo JSON supera 2 MiB.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error415": {
+        "description": "Falta Content-Type: application/json.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "JSON con tipos incorrectos, campos desconocidos o campos obligatorios ausentes.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error500": {
+        "description": "Error interno; se devuelve un mensaje genérico.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

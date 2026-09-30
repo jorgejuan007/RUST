@@ -25,7 +25,7 @@ dependencias de `requirements-docs.txt`.
 
 ## Práctica con corrección automática
 
-Completa las plantillas de los días 9–12 y 16–20 y comprueba tu respuesta:
+Completa las doce plantillas de los días 9–12, 16–20 y 25–27 y comprueba tu respuesta:
 
 ```bash
 python3 scripts/practica.py listar
@@ -53,6 +53,8 @@ cargo run --bin bonus_backend_axum_cliente -- list
 
 CLI y API comparten SQLite. Incluyen creación, consulta, edición, borrado, filtros,
 paginación y pruebas HTTP. Sigue la [guía del proyecto](docs/28_proyecto_tareas_persistente.md).
+Puedes guardar y recuperar copias JSON conservando los identificadores; la API sirve
+su contrato en `/openapi.json`. Consulta [copias y contrato HTTP](docs/29_copias_y_contrato_api.md).
 
 ## Ejecutar los ejemplos diarios
 
@@ -125,7 +127,7 @@ make ci
 ```
 
 `make ci` comprueba formato, Clippy, compilación, pruebas Rust/Python, soluciones de
-ejercicios, enlaces portables y la construcción estricta del sitio. Sigue la
+ejercicios, contrato OpenAPI, respuestas HTTP reales, enlaces portables y la construcción estricta del sitio. Sigue la
 [guía de automatización y Pages](docs/17_automatizacion_y_publicacion.md).
 
 Para correr los tests del dia 23:
@@ -226,6 +228,9 @@ cargo run --bin reto_30_cli_tareas -- list
 - Persistencia con CSV y TOML: [docs/24_persistencia_con_csv_y_toml.md](docs/24_persistencia_con_csv_y_toml.md)
 - SQLite con rusqlite: [docs/25_sqlite_con_rusqlite.md](docs/25_sqlite_con_rusqlite.md)
 - Backend axum modular y storage: [docs/26_backend_axum_modular_y_storage.md](docs/26_backend_axum_modular_y_storage.md)
+- Práctica corregible: [docs/27_practica_con_correccion.md](docs/27_practica_con_correccion.md)
+- Proyecto final persistente: [docs/28_proyecto_tareas_persistente.md](docs/28_proyecto_tareas_persistente.md)
+- Copias y contrato HTTP: [docs/29_copias_y_contrato_api.md](docs/29_copias_y_contrato_api.md)
 
 ## Automatizacion y despliegue
 

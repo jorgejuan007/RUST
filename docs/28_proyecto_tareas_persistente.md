@@ -25,6 +25,7 @@ cargo run --bin proyecto_tareas_cli -- done 1
 cargo run --bin proyecto_tareas_cli -- reopen 1
 cargo run --bin proyecto_tareas_cli -- stats
 cargo run --bin proyecto_tareas_cli -- delete 1
+cargo run --bin proyecto_tareas_cli -- backup ./copias/tareas.backup.json
 ```
 
 Devuelve JSON por salida estándar y un código distinto de cero ante errores.
@@ -37,6 +38,10 @@ cargo run --bin proyecto_tareas_cli -- --db ./mis-tareas.sqlite3 add "Estudiar"
 La API y la CLI deben recibir la misma ruta `--db` para compartir datos. El valor
 predeterminado es `target/tasks.sqlite3`; `cargo clean` elimina ese archivo. Usa una
 ruta propia para datos que quieras conservar y exclúyela de Git.
+
+Las copias incluyen todas las tareas y el historial de identificadores. `restore`
+recupera una copia en una base nueva. Sigue la [guía de copias y contrato API](29_copias_y_contrato_api.md)
+para probar la recuperación y consultar el contrato OpenAPI descargable.
 
 ## Servidor y cliente
 
@@ -61,6 +66,7 @@ de `get`, `done`, `delete` y `stats`. Sus peticiones tienen un timeout de 10 seg
 | Método | Ruta | Resultado |
 |---|---|---|
 | GET | `/salud` | Estado del servicio, 200 |
+| GET | `/openapi.json` | Contrato OpenAPI 3.1.1, 200 |
 | GET | `/stats` | Total y pendientes, 200 |
 | POST | `/tasks` | Crea una tarea, 201 |
 | GET | `/tasks` | Página de tareas y total filtrado, 200 |
@@ -94,6 +100,7 @@ coincidencias antes de paginar. El orden es por identificador ascendente.
 - `limit`: de 1 a 100; valor predeterminado 20.
 - `offset`: entero no negativo; valor predeterminado 0.
 - Los títulos se recortan y deben tener de 1 a 200 caracteres Unicode.
+- Los títulos no admiten caracteres NUL; se rechazan con 400 antes de consultar SQLite.
 - `PATCH` exige al menos `titulo` o `hecha`; una edición inválida no cambia ningún campo.
 - Los identificadores son positivos y no se reutilizan después de borrar.
 
@@ -124,6 +131,8 @@ los archivos dañados producen errores; no se borran para ocultar el problema.
 ```bash
 cargo test --test api_tareas
 cargo test --test cli_tareas
+cargo test --test copias_tareas
+make test-contract
 ```
 
 Las pruebas comprueban CRUD, errores HTTP, filtros, Unicode, paginación, concurrencia,

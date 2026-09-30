@@ -35,6 +35,7 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 
 - [Práctica con corrección automática](27_practica_con_correccion.md)
 - [Proyecto final persistente con CLI y API](28_proyecto_tareas_persistente.md)
+- [Copias recuperables y contrato HTTP](29_copias_y_contrato_api.md)
 
 1. Lee primero el manual principal.
 2. Usa la guia de estudio para organizar tu rutina.

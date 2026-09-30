@@ -128,7 +128,12 @@ async fn filtros_unicode_y_paginacion() {
 #[tokio::test]
 async fn entradas_invalidas_no_crean_tareas() {
     let app = app();
-    for title in ["".to_owned(), " \n\t".to_owned(), "é".repeat(201)] {
+    for title in [
+        "".to_owned(),
+        " \n\t".to_owned(),
+        "é".repeat(201),
+        "\0NUL".to_owned(),
+    ] {
         let (status, error) = request(&app, "POST", "/tasks", json!({"titulo": title})).await;
         assert_eq!(status, StatusCode::BAD_REQUEST);
         assert_eq!(error["error"]["codigo"], "entrada_invalida");

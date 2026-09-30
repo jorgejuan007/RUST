@@ -1,6 +1,10 @@
-use super::models::{ListOptions, Task, TaskPage, TaskStats, UpdateTask};
-use rusqlite::{params, Connection, OptionalExtension, Row};
+use super::{
+    backup::{Backup, MAX_BACKUP_TASKS},
+    models::{ListOptions, Task, TaskPage, TaskStats, UpdateTask},
+};
+use rusqlite::{params, Connection, OptionalExtension, Row, TransactionBehavior};
 use std::{
+    collections::HashSet,
     fs,
     path::Path,
     sync::{Arc, Mutex, MutexGuard},
@@ -48,6 +52,11 @@ fn validate_id(id: i64) -> Result<(), StoreError> {
 
 fn validate_title(title: &str) -> Result<String, StoreError> {
     let title = title.trim();
+    if title.contains('\0') {
+        return Err(StoreError::Invalid(
+            "el título no admite caracteres NUL".into(),
+        ));
+    }
     if title.is_empty() || title.chars().count() > 200 {
         return Err(StoreError::Invalid(
             "el titulo debe tener entre 1 y 200 caracteres".into(),
@@ -212,6 +221,109 @@ impl TaskStore {
         Ok(TaskStats {
             total: total as u64,
             pendientes: pending as u64,
+        })
+    }
+
+    /// Captura todas las tareas y la secuencia de IDs en la misma transacción.
+    pub fn snapshot(&self) -> Result<Backup, StoreError> {
+        let mut connection = self.connection()?;
+        let transaction = connection.transaction()?;
+        let count: i64 =
+            transaction.query_row("SELECT COUNT(*) FROM tasks", [], |row| row.get(0))?;
+        if count > MAX_BACKUP_TASKS as i64 {
+            return Err(StoreError::Invalid(
+                "las copias admiten hasta 10000 tareas".into(),
+            ));
+        }
+        let ultimo_id = transaction
+            .query_row(
+                "SELECT seq FROM sqlite_sequence WHERE name = 'tasks'",
+                [],
+                |row| row.get(0),
+            )
+            .optional()?
+            .unwrap_or(0);
+        let tareas = {
+            let mut statement =
+                transaction.prepare("SELECT id, titulo, hecha FROM tasks ORDER BY id")?;
+            let rows = statement.query_map([], task_from_row)?;
+            rows.collect::<Result<Vec<_>, _>>()?
+        };
+        transaction.commit()?;
+        Ok(Backup {
+            version: 1,
+            ultimo_id,
+            tareas,
+        })
+    }
+
+    /// Restaura en una base sin tareas ni historial de IDs. Nunca borra datos existentes.
+    pub fn restore(&self, backup: &Backup) -> Result<TaskStats, StoreError> {
+        if backup.version != 1 {
+            return Err(StoreError::Invalid(format!(
+                "versión de copia no compatible: {}",
+                backup.version
+            )));
+        }
+        if backup.tareas.len() > MAX_BACKUP_TASKS || backup.ultimo_id < 0 {
+            return Err(StoreError::Invalid(
+                "copia con tamaño o secuencia de IDs no válidos".into(),
+            ));
+        }
+        let mut ids = HashSet::new();
+        for task in &backup.tareas {
+            validate_id(task.id)?;
+            if task.id > backup.ultimo_id || !ids.insert(task.id) {
+                return Err(StoreError::Invalid(
+                    "copia con IDs duplicados o superiores a ultimo_id".into(),
+                ));
+            }
+            if validate_title(&task.titulo)? != task.titulo {
+                return Err(StoreError::Invalid(
+                    "los títulos de la copia deben estar recortados".into(),
+                ));
+            }
+        }
+        let mut connection = self.connection()?;
+        // Reservar la escritura evita que otra conexión inserte entre el chequeo y la restauración.
+        let transaction = connection.transaction_with_behavior(TransactionBehavior::Immediate)?;
+        let count: i64 =
+            transaction.query_row("SELECT COUNT(*) FROM tasks", [], |row| row.get(0))?;
+        let sequence: i64 = transaction
+            .query_row(
+                "SELECT seq FROM sqlite_sequence WHERE name = 'tasks'",
+                [],
+                |row| row.get(0),
+            )
+            .optional()?
+            .unwrap_or(0);
+        if count != 0 || sequence != 0 {
+            return Err(StoreError::Invalid(
+                "restaura en una base nueva, sin tareas ni historial de IDs".into(),
+            ));
+        }
+        {
+            let mut statement = transaction.prepare(
+                "INSERT INTO tasks (id, titulo, busqueda, hecha) VALUES (?1, ?2, ?3, ?4)",
+            )?;
+            for task in &backup.tareas {
+                statement.execute(params![
+                    task.id,
+                    task.titulo,
+                    task.titulo.to_lowercase(),
+                    task.hecha
+                ])?;
+            }
+        }
+        transaction.execute("DELETE FROM sqlite_sequence WHERE name = 'tasks'", [])?;
+        transaction.execute(
+            "INSERT INTO sqlite_sequence (name, seq) VALUES ('tasks', ?1)",
+            [backup.ultimo_id],
+        )?;
+        transaction.commit()?;
+        Ok(TaskStats {
+            total: backup.tareas.len() as u64,
+            pendientes: backup.tareas.iter().filter(|task| !task.hecha).count() as u64,
         })
     }
 }

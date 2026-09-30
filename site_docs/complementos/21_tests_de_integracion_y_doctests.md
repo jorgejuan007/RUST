@@ -16,7 +16,7 @@ Son buenos para:
 
 En este repo ya tienes varios en:
 
-- src/lib.rs (`src/lib.rs`)
+- [src/lib.rs](https://github.com/jorgejuan007/RUST/blob/main/src/lib.rs)
 
 ## Tests de integracion
 
@@ -29,7 +29,7 @@ Eso obliga a comprobar dos cosas valiosas:
 
 Ejemplo anadido al repo:
 
-- tests/integracion_curso.rs (`tests/integracion_curso.rs`)
+- [tests/integracion_curso.rs](https://github.com/jorgejuan007/RUST/blob/main/tests/integracion_curso.rs)
 
 Lanzalo con:
 
@@ -49,7 +49,7 @@ Ventajas:
 
 Ahora el repo ya incorpora varios doctests en:
 
-- src/lib.rs (`src/lib.rs`)
+- [src/lib.rs](https://github.com/jorgejuan007/RUST/blob/main/src/lib.rs)
 
 Puedes correrlos con:
 

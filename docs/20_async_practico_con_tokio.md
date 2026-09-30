@@ -38,7 +38,7 @@ Te sirve para:
 
 En este repositorio ya tienes un ejemplo simple con `join!`:
 
-- [src/bin/bonus_async_tokio.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_async_tokio.rs)
+- [src/bin/bonus_async_tokio.rs](../src/bin/bonus_async_tokio.rs)
 
 ## `timeout`
 
@@ -64,7 +64,7 @@ Es una herramienta clave para cancelacion y coordinacion.
 
 Archivo:
 
-- [src/bin/bonus_async_tokio_avanzado.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_async_tokio_avanzado.rs)
+- [src/bin/bonus_async_tokio_avanzado.rs](../src/bin/bonus_async_tokio_avanzado.rs)
 
 Ejecuta:
 
@@ -114,4 +114,4 @@ Async en Rust merece la pena, pero gana mucho cuando llegas con buena base previ
 
 Una vez te sientas comodo con esta capa, pasa a:
 
-- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)

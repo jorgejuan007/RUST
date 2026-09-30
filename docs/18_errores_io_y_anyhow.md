@@ -77,8 +77,8 @@ Esa ultima parte importa mucho porque vuelve tu codigo testeable.
 
 Puedes verlo aqui:
 
-- [src/bin/bonus_errores_io_anyhow.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_errores_io_anyhow.rs)
-- [data/bonus_numeros.txt](/Users/legalintermedia/Documents/GitHub/RUST/data/bonus_numeros.txt)
+- [src/bin/bonus_errores_io_anyhow.rs](../src/bin/bonus_errores_io_anyhow.rs)
+- [data/bonus_numeros.txt](../data/bonus_numeros.txt)
 
 Prueba:
 
@@ -116,8 +116,8 @@ Funciona para demos pequenas, pero escala mal y se testea peor.
 
 En este mismo repositorio ya tienes un ejemplo mas estructurado con:
 
-- [src/lib.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/lib.rs)
-- [src/bin/bonus_gestor_tareas_json.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_gestor_tareas_json.rs)
+- [src/lib.rs](../src/lib.rs)
+- [src/bin/bonus_gestor_tareas_json.rs](../src/bin/bonus_gestor_tareas_json.rs)
 
 Ahi `TaskStoreError` modela errores concretos del almacenamiento JSON.
 

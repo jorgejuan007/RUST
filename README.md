@@ -2,13 +2,13 @@
 
 Este repositorio ya queda preparado como curso practico completo de Rust. Incluye:
 
-- el manual detallado en [manual_rust_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/manual_rust_30_dias.md)
+- el manual detallado en [manual_rust_30_dias.md](manual_rust_30_dias.md)
 - un proyecto Rust listo para ejecutar
 - un ejemplo ejecutable por cada dia en `src/bin/`
 - archivos de apoyo en `data/`
-- documentacion complementaria en [docs/README.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/README.md)
+- documentacion complementaria en [docs/README.md](docs/README.md)
 - un proyecto bonus mas completo en `bonus_gestor_tareas_std`
-- una libreria reutilizable con modulos y tests en [src/lib.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/lib.rs)
+- una libreria reutilizable con modulos y tests en [src/lib.rs](src/lib.rs)
 - una capa avanzada con `clap`, `serde`, `serde_json` y `thiserror`
 - ejemplos locales de backend con `axum` y `reqwest`
 - ejemplos de persistencia con `csv` y `toml`
@@ -17,6 +17,44 @@ Este repositorio ya queda preparado como curso practico completo de Rust. Incluy
 - automatizacion local con `Makefile` y CI/Pages con GitHub Actions
 
 ## Como usar el curso
+
+Rust se instala con [rustup](https://rust-lang.org/tools/install/). Este proyecto fija
+Rust 1.98.1 con rustfmt y Clippy en `rust-toolchain.toml`; rustup lo selecciona al entrar
+en el repositorio. Para la documentación necesitas Python 3.12 o posterior y las
+dependencias de `requirements-docs.txt`.
+
+## Práctica con corrección automática
+
+Completa las plantillas de los días 9–12 y 16–20 y comprueba tu respuesta:
+
+```bash
+python3 scripts/practica.py listar
+python3 scripts/practica.py pista 9
+python3 scripts/practica.py comprobar 9
+```
+
+Consulta [los ejercicios](ejercicios/README.md). Sus `todo!()` son intencionales y no
+impiden ejecutar las pruebas del curso principal.
+
+## Proyecto final: CLI y API persistentes
+
+```bash
+cargo run --bin proyecto_tareas_cli -- add "Practicar Rust"
+cargo run --bin proyecto_tareas_cli -- list
+cargo run --bin bonus_backend_axum_modular
+```
+
+El servidor sigue activo hasta Ctrl+C. En otra terminal:
+
+```bash
+cargo run --bin bonus_backend_axum_cliente -- health
+cargo run --bin bonus_backend_axum_cliente -- list
+```
+
+CLI y API comparten SQLite. Incluyen creación, consulta, edición, borrado, filtros,
+paginación y pruebas HTTP. Sigue la [guía del proyecto](docs/28_proyecto_tareas_persistente.md).
+
+## Ejecutar los ejemplos diarios
 
 Instala Rust y luego, desde la raiz del repo:
 
@@ -86,7 +124,9 @@ make doc-api
 make ci
 ```
 
-`make ci` regenera `site_docs`, ejecuta `cargo check --bins`, `cargo test` y `mkdocs build --strict`.
+`make ci` comprueba formato, Clippy, compilación, pruebas Rust/Python, soluciones de
+ejercicios, enlaces portables y la construcción estricta del sitio. Sigue la
+[guía de automatización y Pages](docs/17_automatizacion_y_publicacion.md).
 
 Para correr los tests del dia 23:
 
@@ -139,7 +179,7 @@ cargo run --bin reto_30_cli_tareas -- list
 
 ## Ruta sugerida de estudio
 
-1. Lee el dia correspondiente en [manual_rust_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/manual_rust_30_dias.md).
+1. Lee el dia correspondiente en [manual_rust_30_dias.md](manual_rust_30_dias.md).
 2. Ejecuta el binario de ese dia.
 3. Reescribe el ejemplo sin mirar.
 4. Consulta la documentacion complementaria cuando necesites mas contexto.
@@ -160,40 +200,40 @@ cargo run --bin reto_30_cli_tareas -- list
 
 ## Material ampliado
 
-- Guia de estudio: [docs/01_guia_de_estudio_y_habitos.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/01_guia_de_estudio_y_habitos.md)
-- Modelo mental: [docs/02_modelo_mental_de_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/02_modelo_mental_de_rust.md)
-- Chuleta: [docs/03_chuleta_rust_y_cargo.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/03_chuleta_rust_y_cargo.md)
-- Diagnostico de errores: [docs/04_diagnostico_de_errores_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/04_diagnostico_de_errores_rust.md)
-- Retos extra: [docs/05_retos_extra_30_dias.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/05_retos_extra_30_dias.md)
-- Proyectos y siguiente nivel: [docs/06_proyectos_finales_y_siguiente_nivel.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/06_proyectos_finales_y_siguiente_nivel.md)
-- Glosario: [docs/07_glosario_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/07_glosario_rust.md)
-- Repaso: [docs/08_preguntas_de_repaso_y_respuestas.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/08_preguntas_de_repaso_y_respuestas.md)
-- Antipatrones y buenas practicas: [docs/09_antipatrones_y_buenas_practicas.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/09_antipatrones_y_buenas_practicas.md)
-- Soluciones de retos: [docs/10_soluciones_a_retos_extra.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/10_soluciones_a_retos_extra.md)
-- Evaluacion final: [docs/11_evaluacion_final_y_rubrica.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/11_evaluacion_final_y_rubrica.md)
-- Serde, clap y thiserror: [docs/12_serde_clap_thiserror.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/12_serde_clap_thiserror.md)
-- Async y Tokio: [docs/13_async_y_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/13_async_y_tokio.md)
-- Arquitectura y refactor: [docs/14_arquitectura_y_refactor_en_rust.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/14_arquitectura_y_refactor_en_rust.md)
-- Ruta postcurso: [docs/15_ruta_postcurso.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/15_ruta_postcurso.md)
-- Soluciones completas ejecutables: [docs/16_soluciones_completas_ejecutables.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/16_soluciones_completas_ejecutables.md)
-- Automatizacion y publicacion: [docs/17_automatizacion_y_publicacion.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/17_automatizacion_y_publicacion.md)
-- Errores, I O y anyhow: [docs/18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
-- Smart pointers y mutabilidad interior: [docs/19_smart_pointers_y_mutabilidad_interior.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/19_smart_pointers_y_mutabilidad_interior.md)
-- Async practico con Tokio: [docs/20_async_practico_con_tokio.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/20_async_practico_con_tokio.md)
-- Tests de integracion y doctests: [docs/21_tests_de_integracion_y_doctests.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/21_tests_de_integracion_y_doctests.md)
-- Cargo profesional y workspaces: [docs/22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)
-- Backend local con axum y reqwest: [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
-- Persistencia con CSV y TOML: [docs/24_persistencia_con_csv_y_toml.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/24_persistencia_con_csv_y_toml.md)
-- SQLite con rusqlite: [docs/25_sqlite_con_rusqlite.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/25_sqlite_con_rusqlite.md)
-- Backend axum modular y storage: [docs/26_backend_axum_modular_y_storage.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/26_backend_axum_modular_y_storage.md)
+- Guia de estudio: [docs/01_guia_de_estudio_y_habitos.md](docs/01_guia_de_estudio_y_habitos.md)
+- Modelo mental: [docs/02_modelo_mental_de_rust.md](docs/02_modelo_mental_de_rust.md)
+- Chuleta: [docs/03_chuleta_rust_y_cargo.md](docs/03_chuleta_rust_y_cargo.md)
+- Diagnostico de errores: [docs/04_diagnostico_de_errores_rust.md](docs/04_diagnostico_de_errores_rust.md)
+- Retos extra: [docs/05_retos_extra_30_dias.md](docs/05_retos_extra_30_dias.md)
+- Proyectos y siguiente nivel: [docs/06_proyectos_finales_y_siguiente_nivel.md](docs/06_proyectos_finales_y_siguiente_nivel.md)
+- Glosario: [docs/07_glosario_rust.md](docs/07_glosario_rust.md)
+- Repaso: [docs/08_preguntas_de_repaso_y_respuestas.md](docs/08_preguntas_de_repaso_y_respuestas.md)
+- Antipatrones y buenas practicas: [docs/09_antipatrones_y_buenas_practicas.md](docs/09_antipatrones_y_buenas_practicas.md)
+- Soluciones de retos: [docs/10_soluciones_a_retos_extra.md](docs/10_soluciones_a_retos_extra.md)
+- Evaluacion final: [docs/11_evaluacion_final_y_rubrica.md](docs/11_evaluacion_final_y_rubrica.md)
+- Serde, clap y thiserror: [docs/12_serde_clap_thiserror.md](docs/12_serde_clap_thiserror.md)
+- Async y Tokio: [docs/13_async_y_tokio.md](docs/13_async_y_tokio.md)
+- Arquitectura y refactor: [docs/14_arquitectura_y_refactor_en_rust.md](docs/14_arquitectura_y_refactor_en_rust.md)
+- Ruta postcurso: [docs/15_ruta_postcurso.md](docs/15_ruta_postcurso.md)
+- Soluciones completas ejecutables: [docs/16_soluciones_completas_ejecutables.md](docs/16_soluciones_completas_ejecutables.md)
+- Automatizacion y publicacion: [docs/17_automatizacion_y_publicacion.md](docs/17_automatizacion_y_publicacion.md)
+- Errores, I O y anyhow: [docs/18_errores_io_y_anyhow.md](docs/18_errores_io_y_anyhow.md)
+- Smart pointers y mutabilidad interior: [docs/19_smart_pointers_y_mutabilidad_interior.md](docs/19_smart_pointers_y_mutabilidad_interior.md)
+- Async practico con Tokio: [docs/20_async_practico_con_tokio.md](docs/20_async_practico_con_tokio.md)
+- Tests de integracion y doctests: [docs/21_tests_de_integracion_y_doctests.md](docs/21_tests_de_integracion_y_doctests.md)
+- Cargo profesional y workspaces: [docs/22_cargo_profesional_y_workspaces.md](docs/22_cargo_profesional_y_workspaces.md)
+- Backend local con axum y reqwest: [docs/23_backend_local_con_axum_y_reqwest.md](docs/23_backend_local_con_axum_y_reqwest.md)
+- Persistencia con CSV y TOML: [docs/24_persistencia_con_csv_y_toml.md](docs/24_persistencia_con_csv_y_toml.md)
+- SQLite con rusqlite: [docs/25_sqlite_con_rusqlite.md](docs/25_sqlite_con_rusqlite.md)
+- Backend axum modular y storage: [docs/26_backend_axum_modular_y_storage.md](docs/26_backend_axum_modular_y_storage.md)
 
 ## Automatizacion y despliegue
 
-- Makefile local: [Makefile](/Users/legalintermedia/Documents/GitHub/RUST/Makefile)
-- Manifiesto del paquete: [Cargo.toml](/Users/legalintermedia/Documents/GitHub/RUST/Cargo.toml)
-- Dependencias docs: [requirements-docs.txt](/Users/legalintermedia/Documents/GitHub/RUST/requirements-docs.txt)
-- CI: [.github/workflows/ci.yml](/Users/legalintermedia/Documents/GitHub/RUST/.github/workflows/ci.yml)
-- GitHub Pages: [.github/workflows/pages.yml](/Users/legalintermedia/Documents/GitHub/RUST/.github/workflows/pages.yml)
+- Makefile local: [Makefile](Makefile)
+- Manifiesto del paquete: [Cargo.toml](Cargo.toml)
+- Dependencias docs: [requirements-docs.txt](requirements-docs.txt)
+- CI: [.github/workflows/ci.yml](.github/workflows/ci.yml)
+- GitHub Pages: [.github/workflows/pages.yml](.github/workflows/pages.yml)
 
 ## Objetivo del repositorio
 

@@ -1,74 +1,65 @@
-# Automatizacion y Publicacion
+# Automatización y publicación fiable
 
-Este documento resume como trabajar el curso con comandos repetibles y como publicar el sitio MkDocs.
+## Preparación local
 
-## Automatizacion local
-
-El repositorio incluye un Makefile (`Makefile`) con objetivos utiles.
-
-### Objetivos principales
+Instala Rust con rustup y Python 3.12 o posterior. La versión de Rust y sus componentes
+se fijan en [rust-toolchain.toml](https://github.com/jorgejuan007/RUST/blob/main/rust-toolchain.toml).
 
 ```bash
-make help
-make sync-docs
-make docs-serve
-make docs-build
-make check
-make test
-make test-doc
-make doc-api
+python3 -m venv .venv
+# macOS y Linux
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements-docs.txt
 make ci
 ```
 
-## Que hace `make ci`
+El [Makefile](https://github.com/jorgejuan007/RUST/blob/main/Makefile) comprueba formato, Clippy, compilación, pruebas Rust,
+pruebas Python, soluciones de los ejercicios y la construcción estricta de MkDocs.
+En Windows también puedes ejecutar cada comando directamente, sin instalar make.
 
-Ejecuta esta secuencia:
+## Enlaces portables
 
-1. regenera `site_docs`
-2. corre `cargo check --bins`
-3. corre `cargo test`
-4. construye MkDocs con `--strict`
-
-## Dependencias de documentacion
-
-Para mantener reproducible la capa web, MkDocs queda fijado en:
-
-- requirements-docs.txt (`requirements-docs.txt`)
-
-## GitHub Actions
-
-Hay dos workflows:
-
-- CI (`.github/workflows/ci.yml`)
-- GitHub Pages (`.github/workflows/pages.yml`)
-
-### CI
-
-Valida:
-
-- sincronizacion de `site_docs`
-- `cargo check --bins`
-- `cargo test`
-- `mkdocs build --strict`
-
-### Pages
-
-Regenera `site_docs`, construye el sitio y publica el directorio `site` en GitHub Pages.
-
-## Flujo recomendado
-
-Antes de subir cambios:
+README y las guías utilizan enlaces relativos al archivo fuente. El
+[generador](https://github.com/jorgejuan007/RUST/blob/main/scripts/sync_mkdocs.py) los convierte a las páginas web correspondientes;
+los enlaces a código y datos apuntan a archivos reales en GitHub.
 
 ```bash
-make ci
+python3 scripts/check_docs.py
+python3 scripts/sync_mkdocs.py
+mkdocs build --strict
 ```
 
-Si estas trabajando contenido web:
+El comprobador rechaza enlaces a rutas del ordenador, archivos inexistentes y rutas
+fuera del repositorio. MkDocs eleva los problemas de enlaces internos a advertencias
+que hacen fallar la construcción estricta. Una prueba adicional regenera el curso
+desde otra carpeta para comprobar que no depende de la ruta original.
 
-```bash
-make docs-serve
-```
+`site_docs/` se genera automáticamente. Edita README, el manual, `docs/`, las instrucciones
+de ejercicios o el generador; evita editar directamente el contenido generado.
 
-## Nota final
+## CI
 
-Esta capa no sustituye el estudio de Rust, pero si mejora mucho la mantenibilidad del curso y evita regresiones silenciosas en la documentacion.
+El [workflow CI](https://github.com/jorgejuan007/RUST/blob/main/.github/workflows/ci.yml) ejecuta las comprobaciones Rust en Linux,
+Windows y macOS. Un job independiente valida la documentación y los ejercicios y
+sube el sitio construido como artefacto `docs-site`.
+
+## Activar GitHub Pages: paso administrativo inicial
+
+El propietario o una persona con permisos de administración debe abrir el repositorio
+en GitHub y seleccionar **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+El permiso de escritura de código no basta para habilitar Pages. El workflow no solicita
+tokens adicionales ni cambia los permisos del repositorio.
+
+Después de activarlo, el [workflow Pages](https://github.com/jorgejuan007/RUST/blob/main/.github/workflows/pages.yml) publica el
+artefacto construido por un CI exitoso de un push a `main` o `master`. Comprueba el
+repositorio, el evento, la rama, el workflow y su resultado antes de descargar el sitio.
+No publica contenido de pull requests.
+
+Si el despliegue falló porque Pages estaba desactivado, vuelve a ejecutar CI en la rama
+principal. También puedes ejecutar Pages manualmente indicando el identificador de
+una ejecución CI exitosa de esa rama. El sitio publicado corresponde a ese artefacto
+validado, sin reconstruir una revisión diferente.
+
+La publicación solo se considera comprobada cuando termina el job `deploy` y la URL
+responde. Construir MkDocs por sí solo no demuestra que la web se haya publicado.

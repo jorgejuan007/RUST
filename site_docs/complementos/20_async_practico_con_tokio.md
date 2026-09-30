@@ -38,7 +38,7 @@ Te sirve para:
 
 En este repositorio ya tienes un ejemplo simple con `join!`:
 
-- src/bin/bonus_async_tokio.rs (`src/bin/bonus_async_tokio.rs`)
+- [src/bin/bonus_async_tokio.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_async_tokio.rs)
 
 ## `timeout`
 
@@ -64,7 +64,7 @@ Es una herramienta clave para cancelacion y coordinacion.
 
 Archivo:
 
-- src/bin/bonus_async_tokio_avanzado.rs (`src/bin/bonus_async_tokio_avanzado.rs`)
+- [src/bin/bonus_async_tokio_avanzado.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_async_tokio_avanzado.rs)
 
 Ejecuta:
 

@@ -1,0 +1,92 @@
+[
+  {
+    "dia": 9,
+    "titulo": "Ownership y devolución de valores",
+    "enunciado": "Devuelve el mismo String y su número de caracteres Unicode. Calcula la longitud antes de mover el texto; evita clone().",
+    "pistas": [
+      "String es un valor poseído: la función recibe su ownership.",
+      "chars().count() cuenta caracteres; len() cuenta bytes.",
+      "Guarda la longitud en una variable y devuelve (texto, longitud)."
+    ]
+  },
+  {
+    "dia": 10,
+    "titulo": "Borrowing inmutable",
+    "enunciado": "Cuenta caracteres Unicode sin tomar ownership del texto. Debe aceptar String prestado y literales.",
+    "pistas": [
+      "Recibir &str permite prestar un String sin moverlo.",
+      "Itera sobre caracteres, no bytes.",
+      "texto.chars().count() devuelve usize."
+    ]
+  },
+  {
+    "dia": 11,
+    "titulo": "Borrowing mutable",
+    "enunciado": "Modifica el texto: recorta extremos, convierte a minúsculas y sustituye cada grupo de espacios por un espacio.",
+    "pistas": [
+      "&mut String permite modificar el valor del llamador.",
+      "split_whitespace() maneja espacios, tabuladores y saltos de línea.",
+      "Une las palabras con un espacio, usa to_lowercase() y asigna con *texto."
+    ]
+  },
+  {
+    "dia": 12,
+    "titulo": "Slices de texto",
+    "enunciado": "Devuelve un slice de la primera palabra, ignorando espacios iniciales. Si no hay palabras devuelve un slice vacío.",
+    "pistas": [
+      "El valor devuelto debe apuntar al texto prestado.",
+      "No necesitas indexar bytes de UTF-8.",
+      "split_whitespace().next().unwrap_or(\"\") conserva el préstamo."
+    ]
+  },
+  {
+    "dia": 16,
+    "titulo": "Option y límites",
+    "enunciado": "Devuelve el valor de la posición o None si no existe, sin panic.",
+    "pistas": [
+      "La posición puede estar fuera del slice.",
+      "get() devuelve Option<&i32>.",
+      "copied() convierte Option<&i32> en Option<i32>."
+    ]
+  },
+  {
+    "dia": 17,
+    "titulo": "Result y validación",
+    "enunciado": "Acepta espacios alrededor de un entero u32 estrictamente positivo. Devuelve Err para cero, negativos, texto inválido o desbordamiento.",
+    "pistas": [
+      "trim() elimina espacios externos antes de parsear.",
+      "parse::<u32>() ya rechaza negativos y números demasiado grandes.",
+      "Convierte el error con map_err y rechaza cero explícitamente."
+    ]
+  },
+  {
+    "dia": 18,
+    "titulo": "Propagación de errores con ?",
+    "enunciado": "Suma los enteros de cada línea no vacía. Los errores de parseo deben indicar la línea (numeración desde 1). Detecta desbordamientos sin panic.",
+    "pistas": [
+      "Usa lines().enumerate() y salta las líneas vacías.",
+      "Convierte el error de parseo a un mensaje con número de línea y propágalo con ?.",
+      "checked_add devuelve Option: conviértelo en Result con ok_or_else."
+    ]
+  },
+  {
+    "dia": 19,
+    "titulo": "Colecciones y HashMap",
+    "enunciado": "Cuenta las palabras separadas por whitespace, normalizando mayúsculas. La puntuación pertenece a la palabra.",
+    "pistas": [
+      "HashMap asocia una palabra con su contador.",
+      "Normaliza cada palabra con to_lowercase().",
+      "entry(clave).or_insert(0) permite incrementar un contador."
+    ]
+  },
+  {
+    "dia": 20,
+    "titulo": "Iteradores y acumulación segura",
+    "enunciado": "Suma solamente los números pares y devuelve i64. Convierte cada valor a i64 antes de sumarlo.",
+    "pistas": [
+      "filter conserva los números que cumplen una condición.",
+      "n % 2 == 0 también sirve para pares negativos.",
+      "Combina iter(), filter(), map() y sum::<i64>()."
+    ]
+  }
+]

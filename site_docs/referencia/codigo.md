@@ -14,9 +14,15 @@ El sitio web no duplica el codigo Rust. En su lugar, resume las rutas mas utiles
 - `src/bin/bonus_persistencia_csv_toml.rs`
 - `src/bin/bonus_sqlite_rusqlite.rs`
 - `src/bin/bonus_backend_axum_modular/main.rs`
+- `src/api/mod.rs`
+- `src/api/storage.rs`
+- `src/bin/bonus_backend_axum_cliente.rs`
+- `src/bin/proyecto_tareas_cli.rs`
 - `src/bin/reto_22_modularizado/main.rs`
 - `src/bin/reto_30_cli_tareas.rs`
 - `tests/integracion_curso.rs`
+- `tests/api_tareas.rs`
+- `tests/cli_tareas.rs`
 
 ## Nota
 

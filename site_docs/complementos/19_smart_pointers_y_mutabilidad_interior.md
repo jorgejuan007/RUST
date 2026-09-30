@@ -90,7 +90,7 @@ Suele combinarse con:
 
 Archivo:
 
-- src/bin/bonus_smart_pointers.rs (`src/bin/bonus_smart_pointers.rs`)
+- [src/bin/bonus_smart_pointers.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_smart_pointers.rs)
 
 Ejecuta:
 

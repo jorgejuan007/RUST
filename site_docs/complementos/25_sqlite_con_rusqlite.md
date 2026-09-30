@@ -28,7 +28,7 @@ Sirve muy bien para:
 
 Archivo:
 
-- src/bin/bonus_sqlite_rusqlite.rs (`src/bin/bonus_sqlite_rusqlite.rs`)
+- [src/bin/bonus_sqlite_rusqlite.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_sqlite_rusqlite.rs)
 
 Ejecuta:
 

@@ -45,9 +45,9 @@ Ese corte suele ser mas limpio que meterlo todo en un solo archivo.
 
 Archivos:
 
-- [src/bin/bonus_persistencia_csv_toml.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_persistencia_csv_toml.rs)
-- [data/bonus_tareas.csv](/Users/legalintermedia/Documents/GitHub/RUST/data/bonus_tareas.csv)
-- [data/bonus_config.toml](/Users/legalintermedia/Documents/GitHub/RUST/data/bonus_config.toml)
+- [src/bin/bonus_persistencia_csv_toml.rs](../src/bin/bonus_persistencia_csv_toml.rs)
+- [data/bonus_tareas.csv](../data/bonus_tareas.csv)
+- [data/bonus_config.toml](../data/bonus_config.toml)
 
 Ejecuta:
 
@@ -123,10 +123,10 @@ En ese punto ya compensa mirar SQLite.
 
 Este documento enlaza especialmente bien con:
 
-- [docs/18_errores_io_y_anyhow.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/18_errores_io_y_anyhow.md)
-- [docs/22_cargo_profesional_y_workspaces.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/22_cargo_profesional_y_workspaces.md)
-- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
-- [docs/25_sqlite_con_rusqlite.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/25_sqlite_con_rusqlite.md)
+- [docs/18_errores_io_y_anyhow.md](18_errores_io_y_anyhow.md)
+- [docs/22_cargo_profesional_y_workspaces.md](22_cargo_profesional_y_workspaces.md)
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
+- [docs/25_sqlite_con_rusqlite.md](25_sqlite_con_rusqlite.md)
 
 ## Cierre
 

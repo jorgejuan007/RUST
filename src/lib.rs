@@ -1,14 +1,23 @@
 pub mod numeros {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, thiserror::Error)]
+    pub enum NumericError {
+        #[error("el resultado no cabe en u64")]
+        Overflow,
+    }
+
     /// Calcula el factorial de `n`.
     ///
     /// ```
     /// use rust_30_dias::numeros::factorial;
     ///
-    /// assert_eq!(factorial(0), 1);
-    /// assert_eq!(factorial(5), 120);
+    /// assert_eq!(factorial(0), Ok(1));
+    /// assert_eq!(factorial(5), Ok(120));
+    /// assert!(factorial(21).is_err());
     /// ```
-    pub fn factorial(n: u64) -> u64 {
-        (1..=n).product::<u64>().max(1)
+    pub fn factorial(n: u64) -> Result<u64, NumericError> {
+        (1..=n).try_fold(1_u64, |producto, factor| {
+            producto.checked_mul(factor).ok_or(NumericError::Overflow)
+        })
     }
 
     /// Genera los primeros `cantidad` elementos de Fibonacci.
@@ -16,17 +25,21 @@ pub mod numeros {
     /// ```
     /// use rust_30_dias::numeros::fibonacci;
     ///
-    /// assert_eq!(fibonacci(1), vec![0]);
-    /// assert_eq!(fibonacci(6), vec![0, 1, 1, 2, 3, 5]);
+    /// assert_eq!(fibonacci(1), Ok(vec![0]));
+    /// assert_eq!(fibonacci(6), Ok(vec![0, 1, 1, 2, 3, 5]));
+    /// assert!(fibonacci(95).is_err());
     /// ```
-    pub fn fibonacci(cantidad: usize) -> Vec<u64> {
-        let mut resultado = Vec::new();
+    pub fn fibonacci(cantidad: usize) -> Result<Vec<u64>, NumericError> {
+        if cantidad > 94 {
+            return Err(NumericError::Overflow);
+        }
+        let mut resultado = Vec::with_capacity(cantidad);
 
         match cantidad {
-            0 => return resultado,
+            0 => return Ok(resultado),
             1 => {
                 resultado.push(0);
-                return resultado;
+                return Ok(resultado);
             }
             _ => {
                 resultado.push(0);
@@ -35,11 +48,13 @@ pub mod numeros {
         }
 
         while resultado.len() < cantidad {
-            let siguiente = resultado[resultado.len() - 1] + resultado[resultado.len() - 2];
+            let siguiente = resultado[resultado.len() - 1]
+                .checked_add(resultado[resultado.len() - 2])
+                .ok_or(NumericError::Overflow)?;
             resultado.push(siguiente);
         }
 
-        resultado
+        Ok(resultado)
     }
 
     pub fn maximo<T: PartialOrd + Copy>(a: T, b: T) -> T {
@@ -63,10 +78,7 @@ pub mod texto {
     /// assert_eq!(primera_palabra(""), "");
     /// ```
     pub fn primera_palabra(texto: &str) -> &str {
-        match texto.split_whitespace().next() {
-            Some(palabra) => palabra,
-            None => "",
-        }
+        texto.split_whitespace().next().unwrap_or_default()
     }
 
     pub fn contar_palabras(texto: &str) -> HashMap<String, usize> {
@@ -104,10 +116,16 @@ pub mod tareas {
         pub estado: Estado,
     }
 
-    #[derive(Debug, Default)]
+    #[derive(Debug)]
     pub struct TaskManager {
         tareas: Vec<Task>,
         siguiente_id: u32,
+    }
+
+    impl Default for TaskManager {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 
     impl TaskManager {
@@ -176,6 +194,8 @@ pub mod tareas {
         }
     }
 }
+
+pub mod api;
 
 pub mod tareas_json {
     use serde::{Deserialize, Serialize};
@@ -302,15 +322,31 @@ mod tests {
 
     #[test]
     fn factorial_funciona() {
-        assert_eq!(factorial(0), 1);
-        assert_eq!(factorial(5), 120);
+        assert_eq!(factorial(0), Ok(1));
+        assert_eq!(factorial(5), Ok(120));
     }
 
     #[test]
     fn fibonacci_funciona() {
-        assert_eq!(fibonacci(0), Vec::<u64>::new());
-        assert_eq!(fibonacci(1), vec![0]);
-        assert_eq!(fibonacci(6), vec![0, 1, 1, 2, 3, 5]);
+        assert_eq!(fibonacci(0), Ok(Vec::<u64>::new()));
+        assert_eq!(fibonacci(1), Ok(vec![0]));
+        assert_eq!(fibonacci(6), Ok(vec![0, 1, 1, 2, 3, 5]));
+    }
+
+    #[test]
+    fn limites_numericos_devuelven_errores() {
+        assert_eq!(factorial(20), Ok(2_432_902_008_176_640_000));
+        assert_eq!(factorial(21), Err(NumericError::Overflow));
+        assert_eq!(factorial(u64::MAX), Err(NumericError::Overflow));
+        assert_eq!(fibonacci(94).unwrap()[93], 12_200_160_415_121_876_738);
+        assert_eq!(fibonacci(95), Err(NumericError::Overflow));
+        assert_eq!(fibonacci(usize::MAX), Err(NumericError::Overflow));
+    }
+
+    #[test]
+    fn default_y_new_asignan_el_mismo_primer_id() {
+        assert_eq!(TaskManager::default().agregar("Primera"), 1);
+        assert_eq!(TaskManager::new().agregar("Primera"), 1);
     }
 
     #[test]

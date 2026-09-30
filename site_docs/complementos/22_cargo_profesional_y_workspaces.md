@@ -22,10 +22,10 @@ Todos ellos ya tienen sentido real en este repositorio.
 
 ## Artefactos utiles de este repo
 
-- Cargo.toml (`Cargo.toml`)
-- Makefile (`Makefile`)
-- src/lib.rs (`src/lib.rs`)
-- src/main.rs (`src/main.rs`)
+- [Cargo.toml](https://github.com/jorgejuan007/RUST/blob/main/Cargo.toml)
+- [Makefile](https://github.com/jorgejuan007/RUST/blob/main/Makefile)
+- [src/lib.rs](https://github.com/jorgejuan007/RUST/blob/main/src/lib.rs)
+- [src/main.rs](https://github.com/jorgejuan007/RUST/blob/main/src/main.rs)
 
 ## `Cargo.toml` como contrato
 
@@ -73,7 +73,7 @@ cargo doc --no-deps
 
 Ya tienes automatizacion util en:
 
-- Makefile (`Makefile`)
+- [Makefile](https://github.com/jorgejuan007/RUST/blob/main/Makefile)
 
 La idea correcta es convertir tareas repetibles en comandos cortos.
 
@@ -108,8 +108,8 @@ Primero agota bien:
 Este curso ya conecta Cargo con automatizacion real:
 
 - [docs/17_automatizacion_y_publicacion.md](17_automatizacion_y_publicacion.md)
-- scripts/sync_mkdocs.py (`scripts/sync_mkdocs.py`)
-- .github/workflows/ci.yml (`.github/workflows/ci.yml`)
+- [scripts/sync_mkdocs.py](https://github.com/jorgejuan007/RUST/blob/main/scripts/sync_mkdocs.py)
+- [.github/workflows/ci.yml](https://github.com/jorgejuan007/RUST/blob/main/.github/workflows/ci.yml)
 
 ## Flujo recomendable
 

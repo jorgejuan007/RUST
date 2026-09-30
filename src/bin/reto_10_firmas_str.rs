@@ -1,3 +1,5 @@
+// Firma deliberadamente limitada para compararla con la version que acepta &str.
+#[allow(clippy::ptr_arg)]
 fn longitud_antigua(texto: &String) -> usize {
     texto.len()
 }

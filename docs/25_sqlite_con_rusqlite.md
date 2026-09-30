@@ -28,7 +28,7 @@ Sirve muy bien para:
 
 Archivo:
 
-- [src/bin/bonus_sqlite_rusqlite.rs](/Users/legalintermedia/Documents/GitHub/RUST/src/bin/bonus_sqlite_rusqlite.rs)
+- [src/bin/bonus_sqlite_rusqlite.rs](../src/bin/bonus_sqlite_rusqlite.rs)
 
 Ejecuta:
 
@@ -100,8 +100,8 @@ SQLite encaja muy bien cuando:
 
 Este documento encaja muy bien con:
 
-- [docs/24_persistencia_con_csv_y_toml.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/24_persistencia_con_csv_y_toml.md)
-- [docs/26_backend_axum_modular_y_storage.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/26_backend_axum_modular_y_storage.md)
+- [docs/24_persistencia_con_csv_y_toml.md](24_persistencia_con_csv_y_toml.md)
+- [docs/26_backend_axum_modular_y_storage.md](26_backend_axum_modular_y_storage.md)
 
 ## Cierre
 

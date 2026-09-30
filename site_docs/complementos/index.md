@@ -33,6 +33,9 @@ Esta carpeta amplia el curso principal con materiales de apoyo para estudiar mej
 
 ## Orden recomendado
 
+- [Práctica con corrección automática](27_practica_con_correccion.md)
+- [Proyecto final persistente con CLI y API](28_proyecto_tareas_persistente.md)
+
 1. Lee primero el manual principal.
 2. Usa la guia de estudio para organizar tu rutina.
 3. Consulta la chuleta y el diagnostico cuando te atasques.

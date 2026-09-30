@@ -1,3 +1,5 @@
+// Se conserva &String para mostrar el coste de clone frente al prestamo &str.
+#[allow(clippy::ptr_arg)]
 fn imprimir_con_clone(texto: &String) {
     let copia = texto.clone();
     println!("Con clone: {copia}");

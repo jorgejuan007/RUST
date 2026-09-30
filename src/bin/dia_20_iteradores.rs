@@ -1,5 +1,5 @@
 fn main() {
-    let numeros = vec![1, 2, 3, 4, 5, 6];
+    let numeros = [1, 2, 3, 4, 5, 6];
 
     let procesados: Vec<i32> = numeros
         .iter()

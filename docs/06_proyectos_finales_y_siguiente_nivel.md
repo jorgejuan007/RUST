@@ -53,7 +53,7 @@ Objetivo:
 
 Cruce util en este repo:
 
-- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
 
 Crates recomendadas:
 
@@ -71,7 +71,7 @@ Objetivo:
 
 Cruce util en este repo:
 
-- [docs/23_backend_local_con_axum_y_reqwest.md](/Users/legalintermedia/Documents/GitHub/RUST/docs/23_backend_local_con_axum_y_reqwest.md)
+- [docs/23_backend_local_con_axum_y_reqwest.md](23_backend_local_con_axum_y_reqwest.md)
 
 Crates recomendadas:
 

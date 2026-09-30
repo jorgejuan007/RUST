@@ -47,7 +47,7 @@ Y aun asi sigue siendo un proyecto abordable.
 
 Archivo:
 
-- src/bin/bonus_backend_axum_reqwest.rs (`src/bin/bonus_backend_axum_reqwest.rs`)
+- [src/bin/bonus_backend_axum_reqwest.rs](https://github.com/jorgejuan007/RUST/blob/main/src/bin/bonus_backend_axum_reqwest.rs)
 
 Ejecuta:
 

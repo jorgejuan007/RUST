@@ -1,5 +1,6 @@
 use std::fs;
 use std::io;
+use std::path::Path;
 
 #[derive(Debug, PartialEq, Eq)]
 struct Task {
@@ -29,9 +30,23 @@ fn guardar_tareas(ruta: &str, tareas: &[Task]) -> io::Result<()> {
     fs::write(ruta, contenido)
 }
 
+/// Los datos del curso viven en `data/`, que esta versionado. Para no modificar el
+/// repositorio, este ejemplo trabaja sobre una copia dentro de `target/` (ignorado por git).
+fn ruta_de_trabajo() -> io::Result<String> {
+    let original = "data/dia_30_tareas.txt";
+    let trabajo = "target/dia_30_tareas.txt";
+
+    fs::create_dir_all("target")?;
+    if !Path::new(trabajo).exists() && Path::new(original).exists() {
+        fs::copy(original, trabajo)?;
+    }
+
+    Ok(trabajo.to_string())
+}
+
 fn main() -> io::Result<()> {
-    let ruta = "data/dia_30_tareas.txt";
-    let mut tareas = cargar_tareas(ruta)?;
+    let ruta = ruta_de_trabajo()?;
+    let mut tareas = cargar_tareas(&ruta)?;
 
     let nueva = Task {
         titulo: String::from("Cerrar curso de Rust"),
@@ -39,7 +54,7 @@ fn main() -> io::Result<()> {
 
     if !tareas.iter().any(|t| t == &nueva) {
         tareas.push(nueva);
-        guardar_tareas(ruta, &tareas)?;
+        guardar_tareas(&ruta, &tareas)?;
     }
 
     for tarea in &tareas {

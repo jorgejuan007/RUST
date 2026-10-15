@@ -1,8 +1,10 @@
 use std::env;
 use std::fs;
 use std::io;
+use std::path::Path;
 
-const RUTA: &str = "data/reto_30_tareas_cli.tsv";
+const RUTA_ORIGINAL: &str = "data/reto_30_tareas_cli.tsv";
+const RUTA_TRABAJO: &str = "target/reto_30_tareas_cli.tsv";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum Estado {
@@ -66,9 +68,21 @@ fn ayuda() {
     println!("cargo run --bin reto_30_cli_tareas -- delete 1");
 }
 
+/// La lista inicial esta en `data/`, que esta versionado. La CLI trabaja sobre una copia
+/// en `target/` (ignorado por git) para que tus cambios no ensucien el repositorio.
+fn ruta_de_trabajo() -> io::Result<String> {
+    fs::create_dir_all("target")?;
+    if !Path::new(RUTA_TRABAJO).exists() && Path::new(RUTA_ORIGINAL).exists() {
+        fs::copy(RUTA_ORIGINAL, RUTA_TRABAJO)?;
+    }
+
+    Ok(RUTA_TRABAJO.to_string())
+}
+
 fn main() -> io::Result<()> {
     let args: Vec<String> = env::args().skip(1).collect();
-    let mut tareas = cargar_tareas(RUTA)?;
+    let ruta = ruta_de_trabajo()?;
+    let mut tareas = cargar_tareas(&ruta)?;
 
     if args.is_empty() {
         ayuda();
@@ -96,7 +110,7 @@ fn main() -> io::Result<()> {
                 estado: Estado::Pendiente,
                 titulo,
             });
-            guardar_tareas(RUTA, &tareas)?;
+            guardar_tareas(&ruta, &tareas)?;
             println!("Tarea agregada.");
         }
         "done" => {
@@ -110,7 +124,7 @@ fn main() -> io::Result<()> {
             };
             if let Some(tarea) = tareas.iter_mut().find(|t| t.id == id) {
                 tarea.estado = Estado::Hecha;
-                guardar_tareas(RUTA, &tareas)?;
+                guardar_tareas(&ruta, &tareas)?;
                 println!("Tarea completada.");
             } else {
                 println!("No existe una tarea con ese id.");
@@ -128,7 +142,7 @@ fn main() -> io::Result<()> {
             let len_inicial = tareas.len();
             tareas.retain(|t| t.id != id);
             if tareas.len() != len_inicial {
-                guardar_tareas(RUTA, &tareas)?;
+                guardar_tareas(&ruta, &tareas)?;
                 println!("Tarea eliminada.");
             } else {
                 println!("No existe una tarea con ese id.");

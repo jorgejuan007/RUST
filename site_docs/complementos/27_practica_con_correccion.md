@@ -21,14 +21,17 @@ python3 scripts/practica.py pista 12 --nivel 2
 
 Los tests incluyen entradas vacías, Unicode y casos límite. Una respuesta que funciona
 solo con el ejemplo del enunciado puede fallar. Cuando pase, explica qué casos cubre y
-qué restricciones expresa la firma. No cambies los tests para aprobar.
+qué restricciones expresa la firma. No cambies los tests para aprobar: `comprobar`
+corrige sobre una copia temporal del paquete y recupera las pruebas confirmadas en git,
+así que editarlas, vaciarlas o marcarlas con `#[ignore]` no cambia el resultado.
 
 ## Corrección y soluciones
 
 La corrección usa `cargo test` sobre el paquete independiente `ejercicios/`.
 Un fallo indica trabajo pendiente; no es un error de instalación si muestra el mensaje
 del `todo!()`. El comando conserva tus archivos y devuelve un código de salida distinto
-de cero cuando hay errores de compilación o pruebas fallidas.
+de cero cuando hay errores de compilación o pruebas fallidas. Además exige que se supere
+al menos una prueba: una corrección con cero pruebas ejecutadas nunca cuenta como apta.
 
 `verificar-soluciones` comprueba todos los modelos de respuesta en una carpeta temporal.
 Este comando forma parte del CI y no resuelve automáticamente tus ejercicios.

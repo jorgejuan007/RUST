@@ -17,6 +17,15 @@ cargo run --bin reto_24_args_reales -- add tarea
 cargo run --bin reto_30_cli_tareas -- list
 ```
 
+Ejecuta los binarios **desde la raíz del repositorio**: los ejemplos que leen `data/`
+(días 18, 21 y 30, y los retos 18 y 30) usan rutas relativas. Los ejemplos que guardan
+cambios (`dia_30_proyecto_final`, `reto_30_cli_tareas`, `bonus_gestor_tareas_std` y
+`bonus_gestor_tareas_json`) trabajan sobre una copia en `target/`, así que los ficheros
+versionados de `data/` no se modifican.
+
+El nombre `nombre_del_reto` del primer ejemplo es un marcador: sustitúyelo por el
+binario que quieras ejecutar de la lista de abajo.
+
 ## Semana 1
 
 1. Dia 1: [reto_01_operaciones_extra.rs](../src/bin/reto_01_operaciones_extra.rs)

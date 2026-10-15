@@ -103,7 +103,7 @@ fn main() -> Result<()> {
         Command::Backup { archivo } => {
             let backup = store.snapshot()?;
             backup.write_new(&archivo)?;
-            serde_json::json!({"archivo": archivo, "tareas": backup.tareas.len(), "ultimo_id": backup.ultimo_id})
+            serde_json::json!({"archivo": archivo.display().to_string(), "tareas": backup.tareas.len(), "ultimo_id": backup.ultimo_id})
         }
         Command::Restore { archivo } => {
             let backup = Backup::read(archivo)?;

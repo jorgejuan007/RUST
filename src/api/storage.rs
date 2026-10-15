@@ -98,21 +98,18 @@ impl TaskStore {
             return Err(StoreError::IncompatibleSchema);
         }
         connection.pragma_update(None, "journal_mode", "WAL")?;
-        match version {
-            0 => {
-                let transaction = connection.transaction()?;
-                transaction.execute_batch(
-                    "CREATE TABLE IF NOT EXISTS tasks (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        titulo TEXT NOT NULL CHECK(length(titulo) BETWEEN 1 AND 200),
-                        busqueda TEXT NOT NULL,
-                        hecha INTEGER NOT NULL DEFAULT 0 CHECK(hecha IN (0, 1))
-                    ); PRAGMA user_version = 1;",
-                )?;
-                transaction.commit()?;
-            }
-            1 => {}
-            _ => unreachable!("la version se valido antes de modificar el esquema"),
+        // La version ya se valido arriba: 0 es una base nueva y 1 ya tiene el esquema.
+        if version == 0 {
+            let transaction = connection.transaction()?;
+            transaction.execute_batch(
+                "CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    titulo TEXT NOT NULL CHECK(length(titulo) BETWEEN 1 AND 200),
+                    busqueda TEXT NOT NULL,
+                    hecha INTEGER NOT NULL DEFAULT 0 CHECK(hecha IN (0, 1))
+                ); PRAGMA user_version = 1;",
+            )?;
+            transaction.commit()?;
         }
         Ok(Self {
             connection: Arc::new(Mutex::new(connection)),

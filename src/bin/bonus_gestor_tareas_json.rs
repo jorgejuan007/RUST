@@ -1,7 +1,10 @@
 use clap::{Parser, Subcommand};
 use rust_30_dias::tareas_json::{Estado, TaskStore, TaskStoreError};
+use std::fs;
+use std::path::{Path, PathBuf};
 
-const RUTA_JSON: &str = "data/bonus_tareas.json";
+const RUTA_ORIGINAL: &str = "data/bonus_tareas.json";
+const RUTA_TRABAJO: &str = "target/bonus_tareas.json";
 
 #[derive(Debug, Parser)]
 #[command(
@@ -39,9 +42,21 @@ fn imprimir_tareas(tareas: &[rust_30_dias::tareas_json::Task]) {
     }
 }
 
+/// La lista inicial esta en `data/`, versionado en el repositorio. Se trabaja sobre una
+/// copia en `target/` (ignorado por git) para no modificar los datos del curso.
+fn ruta_de_trabajo() -> std::io::Result<PathBuf> {
+    fs::create_dir_all("target")?;
+    if !Path::new(RUTA_TRABAJO).exists() && Path::new(RUTA_ORIGINAL).exists() {
+        fs::copy(RUTA_ORIGINAL, RUTA_TRABAJO)?;
+    }
+
+    Ok(PathBuf::from(RUTA_TRABAJO))
+}
+
 fn main() -> Result<(), TaskStoreError> {
     let cli = Cli::parse();
-    let mut store = TaskStore::load(RUTA_JSON)?;
+    let ruta = ruta_de_trabajo()?;
+    let mut store = TaskStore::load(&ruta)?;
 
     match cli.comando {
         Comando::List => {
@@ -54,12 +69,12 @@ fn main() -> Result<(), TaskStoreError> {
                 return Ok(());
             }
             let id = store.add(&titulo);
-            store.save(RUTA_JSON)?;
+            store.save(&ruta)?;
             println!("Tarea agregada con id {id}.");
         }
         Comando::Done { id } => {
             if store.complete(id) {
-                store.save(RUTA_JSON)?;
+                store.save(&ruta)?;
                 println!("Tarea completada.");
             } else {
                 println!("No existe una tarea con ese id.");
@@ -67,7 +82,7 @@ fn main() -> Result<(), TaskStoreError> {
         }
         Comando::Delete { id } => {
             if store.delete(id) {
-                store.save(RUTA_JSON)?;
+                store.save(&ruta)?;
                 println!("Tarea eliminada.");
             } else {
                 println!("No existe una tarea con ese id.");

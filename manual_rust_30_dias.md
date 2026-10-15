@@ -371,12 +371,12 @@ fn main() {
 
 **Enunciado**
 
-Escribe una funcion que reciba una referencia a un `String` y muestre su longitud sin tomar ownership.
+Escribe una funcion que reciba una referencia al texto y muestre su longitud sin tomar ownership.
 
 **Solucion guia**
 
 ```rust
-fn imprimir_longitud(texto: &String) {
+fn imprimir_longitud(texto: &str) {
     println!("Texto: {texto}");
     println!("Longitud: {}", texto.len());
 }
@@ -392,7 +392,8 @@ fn main() {
 
 - Usaste `&mensaje` en la llamada.
 - Entiendes que el valor sigue vivo despues de la funcion.
-- Sabes que esta firma podria mejorarse a `&str`.
+- Sabes que `fn imprimir_longitud(texto: &String)` tambien compilaria, pero `&str` es
+  mejor: acepta literales y no ata la funcion a un tipo concreto.
 - No clonaste el `String`.
 
 ## Dia 11. Referencias mutables

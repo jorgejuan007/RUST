@@ -66,6 +66,12 @@ cargo run
 
 Eso te mostrara un indice rapido del curso.
 
+Los ejemplos que leen `data/` (dias 18, 21 y 30, y los retos 18 y 30) usan rutas
+relativas, asi que hay que ejecutarlos desde la raiz. Los que guardan cambios
+(`dia_30_proyecto_final`, `reto_30_cli_tareas`, `bonus_gestor_tareas_std` y
+`bonus_gestor_tareas_json`) trabajan sobre una copia en `target/` y no modifican los
+ficheros versionados de `data/`.
+
 Para ejecutar un dia concreto:
 
 ```bash

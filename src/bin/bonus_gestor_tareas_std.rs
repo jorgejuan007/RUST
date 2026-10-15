@@ -1,8 +1,10 @@
 use std::env;
 use std::fs;
 use std::io;
+use std::path::Path;
 
-const RUTA_TAREAS: &str = "data/bonus_tareas.tsv";
+const RUTA_ORIGINAL: &str = "data/bonus_tareas.tsv";
+const RUTA_TRABAJO: &str = "target/bonus_tareas.tsv";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum Estado {
@@ -122,8 +124,20 @@ fn ayuda() {
     println!("cargo run --bin bonus_gestor_tareas_std -- delete 1");
 }
 
+/// La lista inicial esta en `data/`, versionado en el repositorio. Se trabaja sobre una
+/// copia en `target/` (ignorado por git) para no modificar los datos del curso.
+fn ruta_de_trabajo() -> io::Result<String> {
+    fs::create_dir_all("target")?;
+    if !Path::new(RUTA_TRABAJO).exists() && Path::new(RUTA_ORIGINAL).exists() {
+        fs::copy(RUTA_ORIGINAL, RUTA_TRABAJO)?;
+    }
+
+    Ok(RUTA_TRABAJO.to_string())
+}
+
 fn main() -> io::Result<()> {
-    let mut tareas = cargar_tareas(RUTA_TAREAS)?;
+    let ruta = ruta_de_trabajo()?;
+    let mut tareas = cargar_tareas(&ruta)?;
     let args: Vec<String> = env::args().skip(1).collect();
 
     if args.is_empty() {
@@ -142,7 +156,7 @@ fn main() -> io::Result<()> {
                 return Ok(());
             }
             agregar_tarea(&mut tareas, titulo);
-            guardar_tareas(RUTA_TAREAS, &tareas)?;
+            guardar_tareas(&ruta, &tareas)?;
             println!("Tarea agregada.");
         }
         "done" => {
@@ -155,7 +169,7 @@ fn main() -> io::Result<()> {
                 return Ok(());
             };
             if completar_tarea(&mut tareas, id) {
-                guardar_tareas(RUTA_TAREAS, &tareas)?;
+                guardar_tareas(&ruta, &tareas)?;
                 println!("Tarea completada.");
             } else {
                 println!("No existe una tarea con ese id.");
@@ -171,7 +185,7 @@ fn main() -> io::Result<()> {
                 return Ok(());
             };
             if borrar_tarea(&mut tareas, id) {
-                guardar_tareas(RUTA_TAREAS, &tareas)?;
+                guardar_tareas(&ruta, &tareas)?;
                 println!("Tarea eliminada.");
             } else {
                 println!("No existe una tarea con ese id.");

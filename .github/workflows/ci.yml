@@ -66,7 +66,13 @@ jobs:
       - name: Generate and verify documentation
         run: |
           python scripts/sync_mkdocs.py
-          git diff --exit-code -- site_docs
+          pendientes=$(git status --porcelain --untracked-files=all -- site_docs)
+          if [ -n "$pendientes" ]; then
+            echo "site_docs no coincide con el material del repositorio."
+            echo "Ejecuta 'python3 scripts/sync_mkdocs.py' y commitea el resultado:"
+            echo "$pendientes"
+            exit 1
+          fi
           mkdocs build --strict
       - name: Preserve validated site
         uses: actions/upload-artifact@v7

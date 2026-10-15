@@ -76,7 +76,9 @@ fn fibonacci(n: usize) {
 ```rust
 fn clasificar(c: char) -> &'static str {
     match c {
-        'a' | 'e' | 'i' | 'o' | 'u' => "vocal",
+        // Comprueba vocales en minuscula y mayuscula: si solo cubres
+        // 'a' | 'e' | 'i' | 'o' | 'u', la rama alfabetica clasifica 'A' como consonante.
+        'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => "vocal",
         '0'..='9' => "numero",
         'a'..='z' | 'A'..='Z' => "consonante",
         _ => "otro",
@@ -104,7 +106,8 @@ fn leer_numero() -> Result<f64, String> {
 
 ```rust
 fn nombre_completo(nombre: &str, apellido: &str) -> String {
-    format!("{nombre} {apellido}")
+    // El binario del reto devuelve "Apellido, Nombre".
+    format!("{apellido}, {nombre}")
 }
 ```
 
